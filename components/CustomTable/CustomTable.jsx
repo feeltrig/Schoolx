@@ -8,11 +8,9 @@ import {
   Tr,
 } from "@chakra-ui/react";
 
-import fakeDb from "../../fakeDb/fakeDb.json";
-
 export default function CustomTable(props) {
   // table headers
-  const {headers, onClick} = props;
+  const {headers, onClick, data, customData} = props;
 
   return (
     <TableContainer
@@ -33,21 +31,39 @@ export default function CustomTable(props) {
           </Tr>
         </Thead>
         <Tbody>
-          {fakeDb.map((teacher, teacherIndex) => (
-            <Tr
-              _hover={{color: "black", cursor: "pointer"}}
-              onClick={() => onClick(teacher)}
-            >
-              <Td>{teacher.first_name}</Td>
-              <Td>{teacher.last_name}</Td>
-              <Td>{teacher.gender}</Td>
-              <Td style={{wordWrap: "break-word"}}>{teacher.address}</Td>
-              <Td>{teacher.phone}</Td>
-              <Td>{teacher.email}</Td>
-            </Tr>
-          ))}
+          {data &&
+            data.map((teacher, teacherIndex) => (
+              <Tr
+                _hover={{color: "black", cursor: "pointer"}}
+                onClick={() => onClick(teacher)}
+              >
+                <Td>{teacher.first_name}</Td>
+                <Td>{teacher.last_name}</Td>
+                <Td>{teacher.gender}</Td>
+                <Td style={{wordWrap: "break-word"}}>{teacher.address}</Td>
+                <Td>{teacher.phone}</Td>
+                <Td>{teacher.email}</Td>
+              </Tr>
+            ))}
+          {customData &&
+            customData.map((custom, customIndex) => (
+              <Tr
+                key={customIndex}
+                _hover={{color: "black", cursor: "pointer"}}
+                onClick={() => onClick(custom)}
+              >
+                {Object.keys(custom)[0] !== "id" && (
+                  <>
+                    <Td>{Object.keys(custom)}</Td>
+                    <Td>{Object.values(custom)}</Td>
+                  </>
+                )}
+              </Tr>
+            ))}
         </Tbody>
       </Table>
     </TableContainer>
   );
 }
+
+// not completely dynamic

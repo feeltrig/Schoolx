@@ -8,7 +8,6 @@ const Layout = ({children}) => {
       style={{
         display: "flex",
         justifyContent: "space-between",
-        border: "2px solid",
       }}
     >
       <Sidebar />

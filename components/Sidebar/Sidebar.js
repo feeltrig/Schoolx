@@ -11,8 +11,7 @@ const Sidebar = () => {
   // container style
   const containerStyle = {
     backgroundColor: "white",
-    position: "fixed",
-    color: "white",
+    position: "sticky",
     fontWeight: 700,
     margin: 0,
     padding: 0,
@@ -22,24 +21,34 @@ const Sidebar = () => {
     flexFlow: "column",
     justifyContent: "center",
   };
+
   const links = [
     {
-      title: FaList,
+      iconName: FaList,
+      title: "Home",
       path: "/",
     },
     {
-      title: FaHistory,
-      path: "/history",
+      iconName: FaHistory,
+      title: "Teachers",
+      path: "/teachers",
     },
     {
-      title: ImStatsBars,
-      path: "/stats",
+      iconName: ImStatsBars,
+      title: "Parents",
+      path: "/parents",
+    },
+    {
+      iconName: ImStatsBars,
+      title: "Students",
+      path: "/students",
     },
   ];
+
   const router = useRouter();
 
   return (
-    <Container sx={containerStyle}>
+    <Container maxW={"12rem"} sx={containerStyle}>
       <Flex flexFlow={"column"} gap="3rem" px="2rem">
         {links.map((items, index) => {
           return (
@@ -48,7 +57,10 @@ const Sidebar = () => {
                 href={items.path}
                 className={router.pathname == items.path ? "activeLink" : ""}
               >
-                <Icon color={"black"} as={items.title} />
+                <Flex alignItems={"center"} gap={"1rem"}>
+                  <Icon color={"black"} as={items.iconName} />
+                  <p>{items.title.toString()}</p>
+                </Flex>
               </Link>
             </div>
           );

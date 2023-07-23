@@ -54,7 +54,7 @@ export default function CustomTable(props) {
               >
                 {Object.keys(custom)[0] !== "id" && (
                   <>
-                    <Td>{Object.keys(custom)}</Td>
+                    <Td>{Object.keys(custom)[0].replace("_", " ")}</Td>
                     <Td>{Object.values(custom)}</Td>
                   </>
                 )}

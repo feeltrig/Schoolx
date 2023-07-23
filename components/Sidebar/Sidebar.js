@@ -3,7 +3,7 @@ import {Container, Flex, Icon} from "@chakra-ui/react";
 import Link from "next/link";
 import {useRouter} from "next/router";
 
-import {FaList, FaHistory} from "react-icons/fa";
+import {FaHome, FaChild, FaChalkboardTeacher, FaUsers} from "react-icons/fa";
 import {ImStatsBars} from "react-icons/im";
 
 const Sidebar = () => {
@@ -24,22 +24,22 @@ const Sidebar = () => {
 
   const links = [
     {
-      iconName: FaList,
+      iconName: FaHome,
       title: "Home",
       path: "/",
     },
     {
-      iconName: FaHistory,
+      iconName: FaChalkboardTeacher,
       title: "Teachers",
       path: "/teachers",
     },
     {
-      iconName: ImStatsBars,
+      iconName: FaUsers,
       title: "Parents",
       path: "/parents",
     },
     {
-      iconName: ImStatsBars,
+      iconName: FaChild,
       title: "Students",
       path: "/students",
     },

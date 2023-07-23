@@ -2,9 +2,9 @@ import {Container, Divider} from "@chakra-ui/react";
 import CustomTable from "../components/CustomTable/CustomTable";
 import SearchBar from "../components/parents/SearchBar";
 import Router from "next/router";
-import fakeDb from "../fakeDb/students.json";
+import fakeDb from "../fakeDb/parents.json";
 
-export default function Teachers() {
+export default function Parents() {
   // table headers
   const headers = [
     "First Name",

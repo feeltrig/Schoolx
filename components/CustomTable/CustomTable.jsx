@@ -35,7 +35,7 @@ export default function CustomTable(props) {
             data.map((teacher, teacherIndex) => (
               <Tr
                 _hover={{color: "black", cursor: "pointer"}}
-                onClick={() => onClick(teacher)}
+                onClick={() => onClick && onClick(teacher)}
               >
                 <Td>{teacher.first_name}</Td>
                 <Td>{teacher.last_name}</Td>
@@ -50,7 +50,7 @@ export default function CustomTable(props) {
               <Tr
                 key={customIndex}
                 _hover={{color: "black", cursor: "pointer"}}
-                onClick={() => onClick(custom)}
+                onClick={() => onClick && onClick(custom)}
               >
                 {Object.keys(custom)[0] !== "id" && (
                   <>

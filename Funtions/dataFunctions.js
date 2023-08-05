@@ -13,3 +13,16 @@ export const clearStringState = (setstate) => {
 export const clearSearchFilter = (initialData, setstate) => {
   setstate(initialData);
 };
+
+// clear search filter
+export const excludeStringFieldsArray = (arrayData, excludeArray) => {
+  return arrayData.filter(
+    (item) =>
+      !lowerCaseArray(excludeArray).includes(item.toString().toLowerCase())
+  );
+};
+
+// lowerCase all string in array
+export const lowerCaseArray = (arrayData) => {
+  return arrayData.map((item) => item.toString().toLowerCase());
+};

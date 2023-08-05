@@ -1,22 +1,10 @@
 import {Center, Text} from "@chakra-ui/react";
 
 const CustomNoData = (props) => {
-  const {
-    nodataMessage,
-    height,
-    width,
-    backgroundColor,
-    textColor,
-    customContainerStyle,
-  } = props;
+  const {nodataMessage, textColor, customNoDataStyles} = props;
 
   return (
-    <Center
-      style={customContainerStyle}
-      h={height}
-      w={width}
-      bg={backgroundColor}
-    >
+    <Center style={customNoDataStyles}>
       <Text color={textColor}>{nodataMessage}</Text>
     </Center>
   );

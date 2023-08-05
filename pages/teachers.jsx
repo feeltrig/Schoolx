@@ -9,14 +9,7 @@ import {gotoPageWithData} from "../Funtions/routingFunctions";
 
 export default function Teachers() {
   // table headers
-  const headers = [
-    "First Name",
-    "Last Name",
-    "Gender",
-    "Address",
-    "Phone",
-    "Email",
-  ];
+  const headers = Object.keys(fakeDb[0]);
 
   // teacher state
   // search state
@@ -59,6 +52,7 @@ export default function Teachers() {
         value={searchText}
         setvalue={(e) => setSearchText(e.target.value)}
         clearvalue={() => clearStringState(setSearchText)}
+        inputStyles={{boxShadow: "0 0 20px 2px rgba(0,0,0,0.1)"}}
       />
       <Divider />
       <CustomTable
@@ -67,6 +61,7 @@ export default function Teachers() {
         onClick={openTeacherDetails}
         textColor={"white"}
         noDataHeight={"20rem"}
+        customTableStyles={{boxShadow: "0 0 20px 2px rgba(0,0,0,0.1)"}}
       />
     </Container>
   );

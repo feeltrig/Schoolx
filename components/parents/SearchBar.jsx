@@ -1,5 +1,5 @@
 import {Icon, Input, InputGroup, InputRightElement} from "@chakra-ui/react";
-import {FaCross, FaSearch} from "react-icons/fa";
+import {FaSearch, FaTimes} from "react-icons/fa";
 
 export default function SearchBar(props) {
   const {value, setvalue, clearvalue, inputStyles} = props;
@@ -17,7 +17,7 @@ export default function SearchBar(props) {
         {value == "" ? (
           <Icon color={"black"} as={FaSearch} />
         ) : (
-          <Icon color={"black"} as={FaCross} onClick={clearvalue} />
+          <Icon color={"black"} as={FaTimes} onClick={clearvalue} />
         )}
       </InputRightElement>
     </InputGroup>

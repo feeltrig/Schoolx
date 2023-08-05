@@ -1,12 +1,12 @@
 import React from "react";
-import {Center, Container, Flex, Icon} from "@chakra-ui/react";
+import {Container, Flex, Icon} from "@chakra-ui/react";
 import Link from "next/link";
 import {useRouter} from "next/router";
 
-import {FaHome, FaChild, FaChalkboardTeacher, FaUsers} from "react-icons/fa";
-import {ImStatsBars} from "react-icons/im";
 
-const Sidebar = () => {
+const Sidebar = (props) => {
+  const {links} = props;
+
   // INITIALIZATIONS
   // container style
   const containerStyle = {
@@ -23,29 +23,6 @@ const Sidebar = () => {
     paddingInline: "2rem",
   };
 
-  const links = [
-    {
-      iconName: FaHome,
-      title: "Home",
-      path: "/",
-    },
-    {
-      iconName: FaChalkboardTeacher,
-      title: "Teachers",
-      path: "/teachers",
-    },
-    {
-      iconName: FaUsers,
-      title: "Parents",
-      path: "/parents",
-    },
-    {
-      iconName: FaChild,
-      title: "Students",
-      path: "/students",
-    },
-  ];
-
   const router = useRouter();
 
   return (
@@ -56,7 +33,12 @@ const Sidebar = () => {
       <Flex flexFlow={"column"} gap="1rem">
         {links.map((items, index) => {
           return (
-            <div key={index}>
+            <div
+              key={index}
+              style={{
+                cursor: "pointer",
+              }}
+            >
               <Link
                 href={items.path}
                 className={router.pathname == items.path ? "activeLink" : ""}

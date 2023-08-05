@@ -12,8 +12,8 @@ import CustomNoData from "../CustomNoData/CustomNoData";
 
 export default function CustomTable(props) {
   // table headers
-  const {headers, onClick, data, customData, noDataHeight} = props;
-  console.log(customData);
+  const {headers, onClick, data, customData, noDataHeight, customTableStyles} =
+    props;
 
   return (
     <>
@@ -25,12 +25,13 @@ export default function CustomTable(props) {
         color="gray.600"
         borderRadius={"1rem"}
         scrollBehavior={"smooth"}
+        customTableStyles={customTableStyles}
       >
         <Table variant="simple">
           <Thead>
             <Tr>
               {headers.map((header, headerIndex) => (
-                <Th key={headerIndex}>{header}</Th>
+                <Th key={headerIndex}>{header.replaceAll("_", " ")}</Th>
               ))}
             </Tr>
           </Thead>
@@ -38,17 +39,17 @@ export default function CustomTable(props) {
             {data &&
               data.map((teacher, teacherIndex) => (
                 <Tr
+                  key={teacherIndex}
                   _hover={{color: "black", cursor: "pointer"}}
                   onClick={() => onClick && onClick(teacher)}
                 >
-                  <Td>{teacher.first_name}</Td>
-                  <Td>{teacher.last_name}</Td>
-                  <Td>{teacher.gender}</Td>
-                  <Td style={{wordWrap: "break-word"}}>{teacher.address}</Td>
-                  <Td>{teacher.phone}</Td>
-                  <Td>{teacher.email}</Td>
+                  {headers.map((header, headerIndex) => (
+                    <Td key={headerIndex}>{teacher[header]}</Td>
+                  ))}
                 </Tr>
               ))}
+
+            {/* custom key value table */}
             {customData !== undefined &&
               customData.map((custom, customIndex) => (
                 <Tr
@@ -72,10 +73,13 @@ export default function CustomTable(props) {
       {data && data.length < 1 && (
         <CustomNoData
           nodataMessage={"No data found"}
-          height={"20rem"}
-          backgroundColor={"gray"}
-          textColor={"white"}
-          customContainerStyle={{borderRadius: "2rem"}}
+          textColor={"gray"}
+          customNoDataStyles={{
+            borderRadius: "1rem",
+            height: "20rem",
+            backgroundColor: "white",
+            boxShadow: "0 0 10px 1px rgba(0,0,0,0.1)",
+          }}
         />
       )}
     </>

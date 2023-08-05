@@ -4,17 +4,36 @@ import SearchBar from "../components/parents/SearchBar";
 import Router from "next/router";
 import fakeDb from "../fakeDb/students.json";
 import {useEffect, useState} from "react";
-import {clearSearchFilter, clearStringState} from "../Funtions/dataFunctions";
+import {
+  clearSearchFilter,
+  clearStringState,
+  excludeStringFieldsArray,
+} from "../Funtions/dataFunctions";
 import {gotoPageWithData} from "../Funtions/routingFunctions";
 
 export default function Teachers() {
   // table headers
-  const headers = Object.keys(fakeDb[0]);
+  const excludeHeader = ["id"];
+  const headers = excludeStringFieldsArray(
+    Object.keys(fakeDb[0]),
+    excludeHeader
+  );
 
   // teacher state
   // search state
-  const [teachers, setteachers] = useState(fakeDb);
+  // loading state
+  const [teachers, setteachers] = useState([]);
   const [searchText, setSearchText] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
+  // get teachers from api
+  useEffect(() => {
+    setIsLoading(true);
+    setTimeout(() => {
+      setteachers(fakeDb);
+      setIsLoading(false);
+    }, 5000);
+  }, []);
 
   // goto teachers detail page
   const openTeacherDetails = (data) => {
@@ -27,10 +46,12 @@ export default function Teachers() {
 
   // search teachers on search text change
   useEffect(() => {
-    if (searchText !== "") {
-      searchTeacher(searchText, setteachers, fakeDb);
-    } else {
-      clearSearchFilter(fakeDb, setteachers);
+    if (!isLoading) {
+      if (searchText !== "") {
+        searchTeacher(searchText, setteachers, fakeDb);
+      } else {
+        clearSearchFilter(fakeDb, setteachers);
+      }
     }
   }, [searchText]);
 
@@ -53,6 +74,8 @@ export default function Teachers() {
         setvalue={(e) => setSearchText(e.target.value)}
         clearvalue={() => clearStringState(setSearchText)}
         inputStyles={{boxShadow: "0 0 20px 2px rgba(0,0,0,0.1)"}}
+        placeholder={"Search teachers"}
+        disabled={isLoading}
       />
       <Divider />
       <CustomTable
@@ -62,6 +85,7 @@ export default function Teachers() {
         textColor={"white"}
         noDataHeight={"20rem"}
         customTableStyles={{boxShadow: "0 0 20px 2px rgba(0,0,0,0.1)"}}
+        isLoading={isLoading}
       />
     </Container>
   );

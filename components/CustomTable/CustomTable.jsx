@@ -1,5 +1,6 @@
 import {
-  Center,
+  Skeleton,
+  Stack,
   Table,
   TableContainer,
   Tbody,
@@ -12,65 +13,114 @@ import CustomNoData from "../CustomNoData/CustomNoData";
 
 export default function CustomTable(props) {
   // table headers
-  const {headers, onClick, data, customData, noDataHeight, customTableStyles} =
-    props;
+  const {
+    headers,
+    onClick,
+    data,
+    customData,
+    noDataHeight,
+    customTableStyles,
+    isLoading,
+  } = props;
 
   return (
     <>
       <TableContainer
         overflowY={data && data.length < 1 ? "hidden" : "scroll"}
         bg={"white"}
-        height={data && data.length < 1 ? "max-content" : "35rem"}
+        maxH={data && data.length < 1 ? "max-content" : "35rem"}
         my={"2rem"}
         color="gray.600"
         borderRadius={"1rem"}
         scrollBehavior={"smooth"}
         customTableStyles={customTableStyles}
       >
-        <Table variant="simple">
-          <Thead>
-            <Tr>
-              {headers.map((header, headerIndex) => (
-                <Th key={headerIndex}>{header.replaceAll("_", " ")}</Th>
-              ))}
-            </Tr>
-          </Thead>
-          <Tbody>
-            {data &&
-              data.map((teacher, teacherIndex) => (
-                <Tr
-                  key={teacherIndex}
-                  _hover={{color: "black", cursor: "pointer"}}
-                  onClick={() => onClick && onClick(teacher)}
-                >
-                  {headers.map((header, headerIndex) => (
-                    <Td key={headerIndex}>{teacher[header]}</Td>
-                  ))}
-                </Tr>
-              ))}
+        {isLoading ? (
+          <Table variant="simple">
+            <Stack>
+              <Tr>
+                <Skeleton>
+                  <Td></Td>
+                </Skeleton>
+              </Tr>
+              <Tr>
+                <Skeleton>
+                  <Td></Td>
+                </Skeleton>
+              </Tr>
+              <Tr>
+                <Skeleton>
+                  <Td></Td>
+                </Skeleton>
+              </Tr>
+              <Tr>
+                <Skeleton>
+                  <Td></Td>
+                </Skeleton>
+              </Tr>
+              <Tr>
+                <Skeleton>
+                  <Td></Td>
+                </Skeleton>
+              </Tr>
+              <Tr>
+                <Skeleton>
+                  <Td></Td>
+                </Skeleton>
+              </Tr>
+              <Tr>
+                <Skeleton>
+                  <Td></Td>
+                </Skeleton>
+              </Tr>
+            </Stack>
+          </Table>
+        ) : (
+          <Table variant="simple">
+            <Thead>
+              <Tr>
+                {headers.map((header, headerIndex) => (
+                  <Th key={headerIndex}>{header.replaceAll("_", " ")}</Th>
+                ))}
+              </Tr>
+            </Thead>
+            <Tbody>
+              {data &&
+                data.map((teacher, teacherIndex) => (
+                  <Tr
+                    key={teacherIndex}
+                    _hover={{color: "black", cursor: "pointer"}}
+                    onClick={() => onClick && onClick(teacher)}
+                  >
+                    {headers.map((header, headerIndex) => (
+                      <Td key={headerIndex}>{teacher[header]}</Td>
+                    ))}
+                  </Tr>
+                ))}
 
-            {/* custom key value table */}
-            {customData !== undefined &&
-              customData.map((custom, customIndex) => (
-                <Tr
-                  key={customIndex}
-                  _hover={{color: "black", cursor: "pointer"}}
-                  onClick={() => onClick && onClick(custom)}
-                >
-                  {Object.keys(custom)[0] !== "id" && (
-                    <>
-                      <Td>{Object.keys(custom)[0].replace("_", " ")}</Td>
-                      <Td>{Object.values(custom)}</Td>
-                    </>
-                  )}
-                </Tr>
-              ))}
-          </Tbody>
-        </Table>
+              {/* custom key value table */}
+              {customData !== undefined &&
+                customData.map((custom, customIndex) => (
+                  <Tr
+                    key={customIndex}
+                    _hover={{color: "black", cursor: "pointer"}}
+                    onClick={() => onClick && onClick(custom)}
+                  >
+                    {Object.keys(custom)[0] !== "id" && (
+                      <>
+                        <Td>{Object.keys(custom)[0].replace("_", " ")}</Td>
+                        <Td>{Object.values(custom)}</Td>
+                      </>
+                    )}
+                  </Tr>
+                ))}
+            </Tbody>
+          </Table>
+        )}
       </TableContainer>
 
       {/* no data message */}
-      {data && data.length < 1 && (
+      {data && data.length < 1 && !isLoading && (
         <CustomNoData
           nodataMessage={"No data found"}
           textColor={"gray"}

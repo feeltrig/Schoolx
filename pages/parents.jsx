@@ -6,6 +6,7 @@ import fakeDb from "../fakeDb/parents.json";
 import {gotoPageWithData} from "../Funtions/routingFunctions";
 import {
   clearSearchFilter,
+  clearStringState,
   excludeStringFieldsArray,
 } from "../Funtions/dataFunctions";
 import {useEffect, useState} from "react";
@@ -57,6 +58,7 @@ export default function Parents() {
         setvalue={(e) => setSearchText(e.target.value)}
         clearvalue={() => clearStringState(setSearchText)}
         inputStyles={{boxShadow: "0 0 20px 2px rgba(0,0,0,0.1)"}}
+        placeholder={"Search parents"}
       />
       <Divider />
       <CustomTable

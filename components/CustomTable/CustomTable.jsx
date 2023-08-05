@@ -9,6 +9,7 @@ import {
   Thead,
   Tr,
 } from "@chakra-ui/react";
+import { arrayFromLength } from "../../Funtions/dataFunctions";
 import CustomNoData from "../CustomNoData/CustomNoData";
 
 export default function CustomTable(props) {
@@ -23,10 +24,12 @@ export default function CustomTable(props) {
     isLoading,
   } = props;
 
+  const skeletonLines = 6;
+
   return (
     <>
       <TableContainer
-        overflowY={data && data.length < 1 ? "hidden" : "scroll"}
+        overflowY={(data && data.length < 1) || isLoading ? "hidden" : "scroll"}
         bg={"white"}
         maxH={data && data.length < 1 ? "max-content" : "35rem"}
         my={"2rem"}
@@ -38,41 +41,13 @@ export default function CustomTable(props) {
         {isLoading ? (
           <Table variant="simple">
             <Stack>
-              <Tr>
-                <Skeleton>
-                  <Td></Td>
-                </Skeleton>
-              </Tr>
-              <Tr>
-                <Skeleton>
-                  <Td></Td>
-                </Skeleton>
-              </Tr>
-              <Tr>
-                <Skeleton>
-                  <Td></Td>
-                </Skeleton>
-              </Tr>
-              <Tr>
-                <Skeleton>
-                  <Td></Td>
-                </Skeleton>
-              </Tr>
-              <Tr>
-                <Skeleton>
-                  <Td></Td>
-                </Skeleton>
-              </Tr>
-              <Tr>
-                <Skeleton>
-                  <Td></Td>
-                </Skeleton>
-              </Tr>
-              <Tr>
-                <Skeleton>
-                  <Td></Td>
-                </Skeleton>
-              </Tr>
+              {arrayFromLength(skeletonLines).map((item) => (
+                <Tr>
+                  <Skeleton>
+                    <Td></Td>
+                  </Skeleton>
+                </Tr>
+              ))}
             </Stack>
           </Table>
         ) : (

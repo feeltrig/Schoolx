@@ -26,3 +26,8 @@ export const excludeStringFieldsArray = (arrayData, excludeArray) => {
 export const lowerCaseArray = (arrayData) => {
   return arrayData.map((item) => item.toString().toLowerCase());
 };
+
+// array with length mentioned
+export const arrayFromLength = (length) => {
+  return Array.from({length});
+};

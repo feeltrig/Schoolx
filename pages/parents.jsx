@@ -29,7 +29,7 @@ export default function Parents() {
       <Divider />
       <CustomTable
         headers={headers}
-        data={fakeDb}
+        customData={fakeDb}
         onClick={openTeacherDetails}
       />
     </Container>

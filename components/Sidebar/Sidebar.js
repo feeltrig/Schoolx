@@ -1,5 +1,5 @@
 import React from "react";
-import {Container, Flex, Icon} from "@chakra-ui/react";
+import {Center, Container, Flex, Icon} from "@chakra-ui/react";
 import Link from "next/link";
 import {useRouter} from "next/router";
 
@@ -15,11 +15,12 @@ const Sidebar = () => {
     fontWeight: 700,
     margin: 0,
     padding: 0,
-    paddingBlock: "3rem",
+    paddingBlock: "2rem",
     height: "100vh",
     display: "flex",
     flexFlow: "column",
-    justifyContent: "center",
+    justifyContent: "start",
+    paddingInline: "2rem",
   };
 
   const links = [
@@ -48,8 +49,11 @@ const Sidebar = () => {
   const router = useRouter();
 
   return (
-    <Container maxW={"12rem"} sx={containerStyle}>
-      <Flex flexFlow={"column"} gap="3rem" px="2rem">
+    <Container maxW={"15rem"} sx={containerStyle}>
+      <Flex h={"40px"} mb={"2rem"} alignItems="center">
+        Logo
+      </Flex>
+      <Flex flexFlow={"column"} gap="1rem">
         {links.map((items, index) => {
           return (
             <div key={index}>

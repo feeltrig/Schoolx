@@ -3,7 +3,6 @@ import {Container, Flex, Icon} from "@chakra-ui/react";
 import Link from "next/link";
 import {useRouter} from "next/router";
 
-
 const Sidebar = (props) => {
   const {links} = props;
 
@@ -26,7 +25,7 @@ const Sidebar = (props) => {
   const router = useRouter();
 
   return (
-    <Container maxW={"15rem"} sx={containerStyle}>
+    <Container w={"15rem"} sx={containerStyle}>
       <Flex h={"40px"} mb={"2rem"} alignItems="center">
         Logo
       </Flex>

@@ -1,3 +1,4 @@
+import {Container} from "@chakra-ui/react";
 import React from "react";
 import {FaChalkboardTeacher, FaChild, FaHome, FaUsers} from "react-icons/fa";
 
@@ -32,10 +33,19 @@ const Layout = ({children}) => {
       style={{
         display: "flex",
         justifyContent: "space-between",
+        flexGrow: 1,
       }}
     >
       <Sidebar links={links} />
-      <div style={{display: "flex", flexGrow: 1}}>{children}</div>
+      <Container
+        bg={"gray.200"}
+        maxW={"calc(100vw - 15rem)"}
+        m={0}
+        p={"2rem"}
+        minH={"100vh"}
+      >
+        {children}
+      </Container>
     </div>
   );
 };

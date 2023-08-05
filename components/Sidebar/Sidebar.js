@@ -2,6 +2,8 @@ import React from "react";
 import {Container, Flex, Icon} from "@chakra-ui/react";
 import Link from "next/link";
 import {useRouter} from "next/router";
+import Image from "next/image";
+import profilePic from "../../assests/svgs/mainlogo.png";
 
 const Sidebar = (props) => {
   const {links} = props;
@@ -26,9 +28,7 @@ const Sidebar = (props) => {
 
   return (
     <Container w={"15rem"} sx={containerStyle}>
-      <Flex h={"40px"} mb={"2rem"} alignItems="center">
-        Logo
-      </Flex>
+      <Image src={profilePic} alt="Picture of the author" />
       <Flex flexFlow={"column"} gap="1rem">
         {links.map((items, index) => {
           return (

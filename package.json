@@ -13,6 +13,7 @@
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
     "apexcharts": "^3.35.5",
+    "axios": "^1.4.0",
     "chart.js": "^3.9.1",
     "faker": "^6.6.6",
     "formik": "^2.4.3",

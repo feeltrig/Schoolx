@@ -1,7 +1,16 @@
-import {Button, Container, Input, Text, VStack} from "@chakra-ui/react";
+import {
+  Button,
+  Container,
+  Input,
+  Text,
+  useToast,
+  VStack,
+} from "@chakra-ui/react";
 import {Field, Form, Formik} from "formik";
 import * as Yup from "yup";
 import CustomFormError from "../components/CustomFormError/CustomFormError";
+import AxiosInstance from "../service/axiosInstance";
+import customToast from "../components/CustomToast/CustomToast";
 
 const AddTeacher = () => {
   const SignupSchema = Yup.object().shape({
@@ -15,6 +24,7 @@ const AddTeacher = () => {
       .required("Required"),
     email: Yup.string().email("Invalid email").required("Required"),
   });
+  const toast = useToast();
 
   return (
     <Container minW={"full"} m={0} p={0}>
@@ -27,8 +37,20 @@ const AddTeacher = () => {
         validateOnChange={true}
         validationSchema={SignupSchema}
         onSubmit={async (values) => {
-          await new Promise((r) => setTimeout(r, 500));
-          alert(JSON.stringify(values, null, 2));
+          AxiosInstance.post("addTeacher", values)
+            .then((res) =>
+              toast({
+                position: "top-right",
+                title: "awdawdawd",
+                containerStyle: {
+                  border: "20px solid red",
+                  height: "100vh",
+                },
+              })
+            )
+            .catch((err) => console.log(err));
+          // await new Promise((r) => setTimeout(r, 500));
+          // alert(JSON.stringify(values, null, 2));
         }}
       >
         {({errors, touched, isValid}) => (

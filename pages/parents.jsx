@@ -18,7 +18,6 @@ export default function Parents() {
     Object.keys(fakeDb[0]),
     excludeHeader
   );
-  console.log(fakeDb);
 
   // parents state
   // search state

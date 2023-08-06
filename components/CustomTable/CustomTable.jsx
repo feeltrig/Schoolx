@@ -9,20 +9,13 @@ import {
   Thead,
   Tr,
 } from "@chakra-ui/react";
-import { arrayFromLength } from "../../Funtions/dataFunctions";
+import {arrayFromLength} from "../../Funtions/dataFunctions";
 import CustomNoData from "../CustomNoData/CustomNoData";
 
 export default function CustomTable(props) {
   // table headers
-  const {
-    headers,
-    onClick,
-    data,
-    customData,
-    noDataHeight,
-    customTableStyles,
-    isLoading,
-  } = props;
+  const {headers, onClick, data, customData, customTableStyles, isLoading} =
+    props;
 
   const skeletonLines = 6;
 
@@ -34,12 +27,27 @@ export default function CustomTable(props) {
         maxH={data && data.length < 1 ? "max-content" : "35rem"}
         my={"2rem"}
         color="gray.600"
-        borderRadius={"1rem"}
         scrollBehavior={"smooth"}
         customTableStyles={customTableStyles}
+        borderRadius={"md"}
+        sx={{
+          "&::-webkit-scrollbar": {
+            width: "0px",
+            height: 0,
+            borderRadius: "8px",
+            backgroundColor: `rgba(0, 0, 0, 0.05)`,
+          },
+          "-ms-overflow-style": "none",
+          "scrollbar-width": "none",
+
+          "&::-webkit-scrollbar:horizontal": {
+            height: "20px !important",
+          },
+        }}
       >
         {isLoading ? (
           <Table variant="simple">
+            {/* loading skeleton */}
             <Stack>
               {arrayFromLength(skeletonLines).map((item) => (
                 <Tr>
@@ -53,7 +61,14 @@ export default function CustomTable(props) {
         ) : (
           <Table variant="simple">
             <Thead>
-              <Tr>
+              <Tr
+                style={{
+                  background: "gray.200",
+                  fontWeight: 900,
+                  boxShadow: "0 0 5px 1px rgba(0,0,0,0.3)",
+                  color: "black",
+                }}
+              >
                 {headers.map((header, headerIndex) => (
                   <Th key={headerIndex}>{header.replaceAll("_", " ")}</Th>
                 ))}
@@ -64,7 +79,11 @@ export default function CustomTable(props) {
                 data.map((teacher, teacherIndex) => (
                   <Tr
                     key={teacherIndex}
-                    _hover={{color: "black", cursor: "pointer"}}
+                    _hover={{
+                      background: "gray.100",
+                      color: "gray.800",
+                      cursor: "pointer",
+                    }}
                     onClick={() => onClick && onClick(teacher)}
                   >
                     {headers.map((header, headerIndex) => (

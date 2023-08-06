@@ -10,21 +10,41 @@ const Layout = ({children}) => {
       iconName: FaHome,
       title: "Home",
       path: "/",
+      subLinks: [],
     },
     {
       iconName: FaChalkboardTeacher,
       title: "Teachers",
       path: "/teachers",
+      subLinks: [
+        {
+          iconName: FaUsers,
+          title: "Parents",
+          path: "/parents",
+        },
+        {
+          iconName: FaUsers,
+          title: "Add Teacher",
+          path: "/addTeacher",
+        },
+        {
+          iconName: FaUsers,
+          title: "Teacher Performance Analysis",
+          path: "/teacherPerformanceAnalysis",
+        },
+      ],
     },
     {
       iconName: FaUsers,
       title: "Parents",
       path: "/parents",
+      subLinks: [],
     },
     {
       iconName: FaChild,
       title: "Students",
       path: "/students",
+      subLinks: [],
     },
   ];
 
@@ -38,7 +58,7 @@ const Layout = ({children}) => {
     >
       <Sidebar links={links} />
       <Container
-        bg={"gray.200"}
+        bg={"purple.200"}
         maxW={"calc(100vw - 15rem)"}
         m={0}
         p={"2rem"}

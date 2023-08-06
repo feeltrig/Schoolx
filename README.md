@@ -1,7 +1,5 @@
 el<!-- todo -->
 
-add search for teachers
-add search for students
 implement performance grapghs for students
 add sorting for listings
 add/edit students, teachers

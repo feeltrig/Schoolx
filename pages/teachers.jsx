@@ -77,7 +77,6 @@ export default function Teachers() {
         placeholder={"Search teachers"}
         disabled={isLoading}
       />
-      <Divider />
       <CustomTable
         headers={headers}
         data={teachers}

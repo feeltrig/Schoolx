@@ -14,6 +14,7 @@ export default function SearchBar(props) {
         background={"white"}
         styles={inputStyles}
         disabled={disabled}
+        shadow={"2xl"}
       />
       <InputRightElement>
         {value == "" ? (

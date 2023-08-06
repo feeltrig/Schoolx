@@ -1,5 +1,15 @@
 import React from "react";
-import {Container, Flex, Icon} from "@chakra-ui/react";
+import {
+  Accordion,
+  AccordionButton,
+  AccordionIcon,
+  AccordionItem,
+  AccordionPanel,
+  Box,
+  Container,
+  Flex,
+  Icon,
+} from "@chakra-ui/react";
 import Link from "next/link";
 import {useRouter} from "next/router";
 import Image from "next/image";
@@ -30,7 +40,53 @@ const Sidebar = (props) => {
     <Container w={"15rem"} sx={containerStyle}>
       <Image src={profilePic} alt="Picture of the author" />
       <Flex flexFlow={"column"} gap="1rem">
-        {links.map((items, index) => {
+        <Accordion allowToggle>
+          {links.map((items, index) => {
+            if (items.subLinks.length > 0) {
+              return (
+                <AccordionItem key={index} style={{border: "none"}}>
+                  <AccordionButton>
+                    <Link
+                      href={items.path}
+                      className={
+                        router.pathname == items.path ? "activeLink" : ""
+                      }
+                    >
+                      <Flex alignItems={"center"} gap={"1rem"}>
+                        <Icon color={"black"} as={items.iconName} />
+                        <p>{items.title.toString()}</p>
+                      </Flex>
+                    </Link>
+                    <AccordionIcon />
+                  </AccordionButton>
+                  <AccordionPanel pb={4}>
+                    Lorem ipsum dolor sit amet, consectetur
+                  </AccordionPanel>
+                </AccordionItem>
+              );
+            } else {
+              return (
+                <AccordionItem key={index} style={{border: "none"}}>
+                  <AccordionButton>
+                    <Link
+                      href={items.path}
+                      className={
+                        router.pathname == items.path ? "activeLink" : ""
+                      }
+                    >
+                      <Flex alignItems={"center"} gap={"1rem"}>
+                        <Icon color={"black"} as={items.iconName} />
+                        <p>{items.title.toString()}</p>
+                      </Flex>
+                    </Link>
+                  </AccordionButton>
+                </AccordionItem>
+              );
+            }
+          })}
+        </Accordion>
+
+        {/* {links.map((items, index) => {
           return (
             <div
               key={index}
@@ -49,7 +105,7 @@ const Sidebar = (props) => {
               </Link>
             </div>
           );
-        })}
+        })} */}
       </Flex>
     </Container>
   );

@@ -1,6 +1,17 @@
-import {Container} from "@chakra-ui/react";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  Container,
+} from "@chakra-ui/react";
 import React from "react";
-import {FaChalkboardTeacher, FaChild, FaHome, FaUsers} from "react-icons/fa";
+import {
+  FaChalkboardTeacher,
+  FaChild,
+  FaHome,
+  FaUsers,
+  FaAngleRight,
+} from "react-icons/fa";
 
 import Sidebar from "../components/Sidebar/Sidebar";
 
@@ -58,12 +69,29 @@ const Layout = ({children}) => {
     >
       <Sidebar links={links} />
       <Container
-        bg={"purple.200"}
+        bgGradient="linear(to-br, gray.300, gray.400)"
         maxW={"calc(100vw - 15rem)"}
         m={0}
         p={"2rem"}
         minH={"100vh"}
       >
+        <Breadcrumb
+          mb={"1rem"}
+          spacing="8px"
+          separator={<FaAngleRight color="gray.200" />}
+        >
+          <BreadcrumbItem>
+            <BreadcrumbLink href="#">Home</BreadcrumbLink>
+          </BreadcrumbItem>
+
+          <BreadcrumbItem>
+            <BreadcrumbLink href="#">About</BreadcrumbLink>
+          </BreadcrumbItem>
+
+          <BreadcrumbItem isCurrentPage>
+            <BreadcrumbLink href="#">Contact</BreadcrumbLink>
+          </BreadcrumbItem>
+        </Breadcrumb>
         {children}
       </Container>
     </div>

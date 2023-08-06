@@ -60,7 +60,20 @@ const Sidebar = (props) => {
                     <AccordionIcon />
                   </AccordionButton>
                   <AccordionPanel pb={4}>
-                    Lorem ipsum dolor sit amet, consectetur
+                    {items.subLinks.map((sublink, sublinkindex) => (
+                      <Link
+                        key={sublinkindex}
+                        href={sublink.path}
+                        className={
+                          router.pathname == sublink.path ? "activeLink" : ""
+                        }
+                      >
+                        <Flex alignItems={"center"} gap={"1rem"}>
+                          <Icon color={"black"} as={sublink.iconName} />
+                          <p>{sublink.title.toString()}</p>
+                        </Flex>
+                      </Link>
+                    ))}
                   </AccordionPanel>
                 </AccordionItem>
               );

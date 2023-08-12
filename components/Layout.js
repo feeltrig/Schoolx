@@ -11,6 +11,7 @@ import {
   FaHome,
   FaUsers,
   FaAngleRight,
+  FaPlus,
 } from "react-icons/fa";
 
 import Sidebar from "../components/Sidebar/Sidebar";
@@ -29,19 +30,14 @@ const Layout = ({children}) => {
       path: "/teachers",
       subLinks: [
         {
-          iconName: FaUsers,
-          title: "Parents",
-          path: "/parents",
-        },
-        {
-          iconName: FaUsers,
+          iconName: FaPlus,
           title: "Add Teacher",
           path: "/addTeacher",
         },
         {
           iconName: FaUsers,
-          title: "Teacher Performance Analysis",
-          path: "/teacherPerformanceAnalysis",
+          title: "Performance",
+          path: "/teacherPerformance",
         },
       ],
     },

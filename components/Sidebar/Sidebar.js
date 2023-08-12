@@ -5,7 +5,6 @@ import {
   AccordionIcon,
   AccordionItem,
   AccordionPanel,
-  Box,
   Container,
   Flex,
   Icon,
@@ -43,6 +42,7 @@ const Sidebar = (props) => {
         <Accordion allowToggle>
           {links.map((items, index) => {
             if (items.subLinks.length > 0) {
+              // sublinks
               return (
                 <AccordionItem key={index} style={{border: "none"}}>
                   <AccordionButton>
@@ -59,20 +59,24 @@ const Sidebar = (props) => {
                     </Link>
                     <AccordionIcon />
                   </AccordionButton>
-                  <AccordionPanel pb={4}>
+                  <AccordionPanel>
                     {items.subLinks.map((sublink, sublinkindex) => (
-                      <Link
-                        key={sublinkindex}
-                        href={sublink.path}
-                        className={
-                          router.pathname == sublink.path ? "activeLink" : ""
-                        }
-                      >
-                        <Flex alignItems={"center"} gap={"1rem"}>
-                          <Icon color={"black"} as={sublink.iconName} />
-                          <p>{sublink.title.toString()}</p>
-                        </Flex>
-                      </Link>
+                      <AccordionButton>
+                        <Link
+                          key={sublinkindex}
+                          href={sublink.path}
+                          className={
+                            router.pathname == sublink.path ? "activeLink" : ""
+                          }
+                        >
+                          <Flex alignItems={"center"} gap={"1rem"}>
+                            <Icon color={"black"} as={sublink.iconName} />
+                            <p style={{fontWeight: "normal"}}>
+                              {sublink.title.toString()}
+                            </p>
+                          </Flex>
+                        </Link>
+                      </AccordionButton>
                     ))}
                   </AccordionPanel>
                 </AccordionItem>

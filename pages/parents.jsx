@@ -59,7 +59,6 @@ export default function Parents() {
         inputStyles={{boxShadow: "0 0 20px 2px rgba(0,0,0,0.1)"}}
         placeholder={"Search parents"}
       />
-      <Divider />
       <CustomTable
         headers={headers}
         data={parents}

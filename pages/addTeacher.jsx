@@ -13,48 +13,69 @@ import CustomFormError from "../components/CustomFormError/CustomFormError";
 import AxiosInstance from "../service/axiosInstance";
 import addTeacherSchema from "../Validations/addTeacherSchema";
 import CustomInputField from "../components/addTeacher/CustomInputField";
+import CustomSelectField from "../components/CustomSelectField/CustomSelectField";
+import {genderList} from "../StaticData/Teachers/teachers";
 
 const AddTeacher = () => {
   const toast = useToast();
+  const initialValues = {
+    firstName: "",
+    lastName: "",
+    email: "",
+    gender: "",
+    phone: null,
+  };
 
   const fields = [
     {
       title: "First Name",
       name: "firstname",
+      type: "text",
       placeholder: "Enter your first name",
+      custom: false,
     },
     {
       title: "Last Name",
       name: "lastname",
+      type: "text",
       placeholder: "Enter your last name",
+      custom: false,
     },
     {
       title: "Email",
       name: "email",
+      type: "email",
       placeholder: "Enter your emailid",
+      custom: false,
     },
     {
       title: "Phone",
       name: "phone",
+      type: "number",
       placeholder: "Enter your phone number",
+      custom: false,
+    },
+    {
+      title: "Gender",
+      name: "gender",
+      type: "gender",
+      placeholder: "Enter your gender",
+      custom: true,
+      customComponent: "CustomSelectField",
     },
     {
       title: "Experience",
       name: "experience",
+      type: "number",
       placeholder: "Enter your experience as a teacher",
+      custom: false,
     },
   ];
 
   return (
     <Container minW={"full"} m={0} p={0}>
       <Formik
-        initialValues={{
-          firstName: "",
-          lastName: "",
-          email: "",
-          gender: "",
-          phone: null,
-        }}
+        initialValues={initialValues}
         validateOnChange={true}
         validationSchema={addTeacherSchema}
         onSubmit={async (values) => {
@@ -93,118 +114,26 @@ const AddTeacher = () => {
                     placeholder={fieldItem.placeholder}
                     errors={errors}
                     touched={touched}
+                    type={fieldItem.type}
+                    customField={fieldItem.custom}
+                    customComponent={
+                      <fieldItem.customComponent
+                        list={genderList}
+                        onChange={(e) => {
+                          handleChange(fieldItem.name)(e);
+                        }}
+                      />
+                    }
                   />
                 ))}
 
-                {/* <VStack flex={1} minW={"20rem"}>
-                  <Text fontSize={"0.9rem"} as={"label"} htmlFor="firstName">
-                    First Name
-                  </Text>
-                  <Input
-                    as={Field}
-                    id="firstName"
-                    name="firstName"
-                    placeholder="Jane"
-                    bgGradient="linear(to-br, white, gray.100)"
-                    shadow={"md"}
-                  />
-                  <CustomFormError
-                    fieldName={"firstName"}
-                    errors={errors}
-                    touchFields={touched}
-                  />
-                </VStack>
-                <VStack align="stretch" minW={"20rem"} flex={1}>
-                  <Text fontSize={"0.9rem"} as={"label"} htmlFor="lastName">
-                    Last Name
-                  </Text>
-                  <Input
-                    as={Field}
-                    id="lastName"
-                    name="lastName"
-                    placeholder="Doe"
-                    bgGradient="linear(to-br, white, gray.100)"
-                    shadow={"md"}
-                  />
-                  <CustomFormError
-                    fieldName={"lastName"}
-                    errors={errors}
-                    touchFields={touched}
-                  />
-                </VStack>
-                <VStack align="stretch" minW={"20rem"} flex={1}>
-                  <Text fontSize={"0.9rem"} as={"label"} htmlFor="email">
-                    Email
-                  </Text>
-                  <Input
-                    as={Field}
-                    id="email"
-                    name="email"
-                    placeholder="jane@acme.com"
-                    type="email"
-                    bgGradient="linear(to-br, white, gray.100)"
-                    shadow={"md"}
-                  />
-                  <CustomFormError
-                    fieldName={"email"}
-                    errors={errors}
-                    touchFields={touched}
-                  />
-                </VStack>
-                <VStack align="stretch" minW={"20rem"} flex={1}>
-                  <Text fontSize={"0.9rem"} as={"label"} htmlFor="email">
-                    Phone
-                  </Text>
-                  <Input
-                    as={Field}
-                    id="phone"
-                    name="phone"
-                    placeholder="phone nummber"
-                    type="number"
-                    bgGradient="linear(to-br, white, gray.100)"
-                    shadow={"md"}
-                  />
-                  <CustomFormError
-                    fieldName={"phone"}
-                    errors={errors}
-                    touchFields={touched}
-                  />
-                </VStack> */}
-                <VStack align="stretch" minW={"20rem"}>
+                {/* <VStack align="stretch" minW={"20rem"}>
                   <Text fontSize={"0.9rem"} as={"label"} htmlFor="email">
                     Gender
                   </Text>
-                  <Select
-                    onChange={(e) => {
-                      handleChange("gender")(e);
-                    }}
-                    placeholder="Select option"
-                  >
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                    <option value="Other">Other</option>
-                  </Select>
+
                   <CustomFormError
                     fieldName={"gender"}
-                    errors={errors}
-                    touchFields={touched}
-                  />
-                </VStack>
-                {/* <VStack align="stretch" minW={"20rem"}>
-                  <Text fontSize={"0.9rem"} as={"label"} htmlFor="email">
-                    Experience
-                  </Text>
-                  <Input
-                    as={Field}
-                    id="experience"
-                    name="experience"
-                    placeholder="experience as teacher"
-                    type="number"
-                    bgGradient="linear(to-br, white, gray.100)"
-                    shadow={"md"}
-                  />
-                  <CustomFormError
-                    fieldName={"experience"}
                     errors={errors}
                     touchFields={touched}
                   />

@@ -8,11 +8,13 @@ import {
   Container,
   Flex,
   Icon,
+  HStack,
 } from "@chakra-ui/react";
 import Link from "next/link";
 import {useRouter} from "next/router";
 import Image from "next/image";
 import profilePic from "../../assests/svgs/mainlogo.png";
+import {CustomStyleConstants} from "../../Utils/customStyleConstants";
 
 const Sidebar = (props) => {
   const {links} = props;
@@ -44,22 +46,28 @@ const Sidebar = (props) => {
             if (items.subLinks.length > 0) {
               // sublinks
               return (
-                <AccordionItem key={index} style={{border: "none"}}>
+                <AccordionItem
+                  key={index}
+                  style={{border: "none"}}
+                  _hover={{boxShadow: CustomStyleConstants["shadow-sm"]}}
+                >
                   <AccordionButton>
-                    <Link
-                      href={items.path}
-                      className={
-                        router.pathname == items.path ? "activeLink" : ""
-                      }
-                    >
-                      <Flex alignItems={"center"} gap={"1rem"}>
-                        <Icon color={"black"} as={items.iconName} />
-                        <p>{items.title.toString()}</p>
-                      </Flex>
-                    </Link>
-                    <AccordionIcon />
+                    <HStack gap={"1rem"} align={"space-between"}>
+                      <Link
+                        href={items.path}
+                        className={
+                          router.pathname == items.path ? "activeLink" : ""
+                        }
+                      >
+                        <Flex alignItems={"center"} gap={"1rem"}>
+                          <Icon color={"black"} as={items.iconName} />
+                          <p>{items.title.toString()}</p>
+                        </Flex>
+                      </Link>
+                      <AccordionIcon />
+                    </HStack>
                   </AccordionButton>
-                  <AccordionPanel>
+                  <AccordionPanel p={0} bg={"gray.100"}>
                     {items.subLinks.map((sublink, sublinkindex) => (
                       <AccordionButton>
                         <Link
@@ -83,7 +91,11 @@ const Sidebar = (props) => {
               );
             } else {
               return (
-                <AccordionItem key={index} style={{border: "none"}}>
+                <AccordionItem
+                  _hover={{boxShadow: CustomStyleConstants["shadow-sm"]}}
+                  key={index}
+                  style={{border: "none"}}
+                >
                   <AccordionButton>
                     <Link
                       href={items.path}

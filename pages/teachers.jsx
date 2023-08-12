@@ -68,7 +68,7 @@ export default function Teachers() {
   };
 
   return (
-    <Container minW={"100%"} m="0">
+    <Container minW={"100%"} m="0" p="0">
       <SearchBar
         value={searchText}
         setvalue={(e) => setSearchText(e.target.value)}

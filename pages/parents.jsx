@@ -51,7 +51,7 @@ export default function Parents() {
   };
 
   return (
-    <Container minW={"full"} m="0">
+    <Container minW={"full"} m="0" p="0">
       <SearchBar
         value={searchText}
         setvalue={(e) => setSearchText(e.target.value)}

@@ -12,8 +12,10 @@ const CustomInputField = (props) => {
     touched,
     customField,
     customComponent,
+    customHandleChange,
     type,
   } = props;
+
   return (
     <VStack flex={1} minW={"20rem"}>
       <Text fontSize={"0.9rem"} as={"label"} htmlFor="firstName">
@@ -30,7 +32,10 @@ const CustomInputField = (props) => {
           shadow={"md"}
         />
       )}
-      {customField && customComponent}
+      {customField &&
+        React.cloneElement(customComponent, {
+          customHandleChange: customHandleChange,
+        })}
       <CustomFormError fieldName={name} errors={errors} touchFields={touched} />
     </VStack>
   );

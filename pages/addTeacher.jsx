@@ -61,7 +61,7 @@ const AddTeacher = () => {
       type: "gender",
       placeholder: "Enter your gender",
       custom: true,
-      customComponent: "CustomSelectField",
+      customComponent: <CustomSelectField list={genderList} name={"gender"} />,
     },
     {
       title: "Experience",
@@ -116,14 +116,8 @@ const AddTeacher = () => {
                     touched={touched}
                     type={fieldItem.type}
                     customField={fieldItem.custom}
-                    customComponent={
-                      <fieldItem.customComponent
-                        list={genderList}
-                        onChange={(e) => {
-                          handleChange(fieldItem.name)(e);
-                        }}
-                      />
-                    }
+                    customComponent={fieldItem.customComponent}
+                    customHandleChange={handleChange}
                   />
                 ))}
 

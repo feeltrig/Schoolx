@@ -12,6 +12,7 @@ import {
   FaUsers,
   FaAngleRight,
   FaPlus,
+  FaCog,
 } from "react-icons/fa";
 
 import Sidebar from "../components/Sidebar/Sidebar";
@@ -51,6 +52,12 @@ const Layout = ({children}) => {
       iconName: FaChild,
       title: "Students",
       path: "/students",
+      subLinks: [],
+    },
+    {
+      iconName: FaCog,
+      title: "Settings",
+      path: "/settings",
       subLinks: [],
     },
   ];

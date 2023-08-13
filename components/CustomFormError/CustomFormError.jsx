@@ -1,7 +1,7 @@
 import {FormErrorMessage, Text} from "@chakra-ui/react";
 
 const CustomFormError = ({errors, fieldName, touchFields}) => {
-  return errors[fieldName] ? (
+  return errors[fieldName] && touchFields ? (
     <Text fontSize={"0.8rem"} color="red">
       {errors[fieldName]}
     </Text>

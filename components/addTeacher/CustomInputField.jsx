@@ -17,7 +17,7 @@ const CustomInputField = (props) => {
   } = props;
 
   return (
-    <VStack flex={1} minW={"20rem"}>
+    <VStack align={"start"} flex={1} minW={"20rem"}>
       <Text fontSize={"0.9rem"} as={"label"} htmlFor="firstName">
         {title}
       </Text>

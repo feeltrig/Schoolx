@@ -1,15 +1,5 @@
-import {
-  Button,
-  Container,
-  Flex,
-  Input,
-  Select,
-  Text,
-  useToast,
-  VStack,
-} from "@chakra-ui/react";
-import {Field, Form, Formik} from "formik";
-import CustomFormError from "../components/CustomFormError/CustomFormError";
+import {Button, Container, Flex, useToast, VStack} from "@chakra-ui/react";
+import {Form, Formik} from "formik";
 import AxiosInstance from "../service/axiosInstance";
 import addTeacherSchema from "../Validations/addTeacherSchema";
 import CustomInputField from "../components/addTeacher/CustomInputField";
@@ -18,6 +8,7 @@ import {genderList} from "../StaticData/Teachers/teachers";
 
 const AddTeacher = () => {
   const toast = useToast();
+
   const initialValues = {
     firstName: "",
     lastName: "",
@@ -29,14 +20,14 @@ const AddTeacher = () => {
   const fields = [
     {
       title: "First Name",
-      name: "firstname",
+      name: "firstName",
       type: "text",
       placeholder: "Enter your first name",
       custom: false,
     },
     {
       title: "Last Name",
-      name: "lastname",
+      name: "lastName",
       type: "text",
       placeholder: "Enter your last name",
       custom: false,
@@ -80,16 +71,21 @@ const AddTeacher = () => {
         validationSchema={addTeacherSchema}
         onSubmit={async (values) => {
           AxiosInstance.post("addTeacher", values)
-            .then((res) =>
+            .then((res) => {
+              console.log(res);
               toast({
                 position: "top-right",
-                title: "awdawdawd",
+                title: res.data.message,
+
                 containerStyle: {
-                  border: "20px solid red",
                   height: "100vh",
+                  padding: "2rem",
+                  margin: 0,
+                  background:
+                    "linear-gradient(180deg, rgba(255,255,255,0.5), transparent)",
                 },
-              })
-            )
+              });
+            })
             .catch((err) => console.log(err));
         }}
       >
@@ -120,18 +116,6 @@ const AddTeacher = () => {
                     customHandleChange={handleChange}
                   />
                 ))}
-
-                {/* <VStack align="stretch" minW={"20rem"}>
-                  <Text fontSize={"0.9rem"} as={"label"} htmlFor="email">
-                    Gender
-                  </Text>
-
-                  <CustomFormError
-                    fieldName={"gender"}
-                    errors={errors}
-                    touchFields={touched}
-                  />
-                </VStack> */}
               </Flex>
               <Button
                 _hover={{

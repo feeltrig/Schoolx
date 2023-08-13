@@ -67,7 +67,7 @@ const Sidebar = (props) => {
                       <AccordionIcon />
                     </HStack>
                   </AccordionButton>
-                  <AccordionPanel p={0} bg={"gray.100"}>
+                  <AccordionPanel p={0} py={"1rem"} bg={"gray.100"}>
                     {items.subLinks.map((sublink, sublinkindex) => (
                       <AccordionButton>
                         <Link

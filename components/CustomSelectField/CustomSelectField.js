@@ -5,6 +5,8 @@ const CustomSelectField = (props) => {
   const {list, placeholder, onChange, customHandleChange, name} = props;
   return (
     <Select
+      shadow={"md"}
+      bg="white"
       onChange={(e) => {
         onChange && onChange(e);
         customHandleChange !== undefined && customHandleChange(name)(e);

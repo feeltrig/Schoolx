@@ -55,27 +55,6 @@ const AddTeacher = () => {
         custom: false,
       },
       {
-        title: "Permanent Address",
-        name: "permanentAddress",
-        type: "textarea",
-        placeholder: "Enter permanent address",
-        custom: true,
-        customComponent: (
-          <CustomTextArea placeholder="Enter permanent address" size="sm" />
-        ),
-      },
-      {
-        title: "Temporary Address",
-        name: "temporaryAddress",
-        type: "textarea",
-        placeholder: "Enter temporary address",
-        custom: true,
-        customComponent: (
-          <CustomTextArea placeholder="Enter temporary address" size="sm" />
-        ),
-      },
-
-      {
         title: "Gender",
         name: "gender",
         type: "gender",
@@ -98,6 +77,26 @@ const AddTeacher = () => {
         type: "number",
         placeholder: "Enter annual salary",
         custom: false,
+      },
+      {
+        title: "Permanent Address",
+        name: "permanentAddress",
+        type: "textarea",
+        placeholder: "Enter permanent address",
+        custom: true,
+        customComponent: (
+          <CustomTextArea placeholder="Enter permanent address" size="sm" />
+        ),
+      },
+      {
+        title: "Temporary Address",
+        name: "temporaryAddress",
+        type: "textarea",
+        placeholder: "Enter temporary address",
+        custom: true,
+        customComponent: (
+          <CustomTextArea placeholder="Enter temporary address" size="sm" />
+        ),
       },
       {
         title: "Photo",

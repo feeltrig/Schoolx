@@ -12,6 +12,7 @@ const CustomTextArea = (props) => {
       size={size}
       onBlur={handleBlur}
       id={id}
+      resize={"none"}
       name={name}
       onChange={(e) => {
         customHandleChange !== undefined && customHandleChange(name)(e);

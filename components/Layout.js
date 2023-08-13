@@ -68,6 +68,7 @@ const Layout = ({children}) => {
         display: "flex",
         justifyContent: "space-between",
         flexGrow: 1,
+        maxHeight: "100vh",
       }}
     >
       <Sidebar links={links} />
@@ -77,6 +78,21 @@ const Layout = ({children}) => {
         m={0}
         p={"2rem"}
         minH={"100vh"}
+        overflowY={"scroll"}
+        sx={{
+          "&::-webkit-scrollbar": {
+            width: "0px",
+            height: 0,
+            borderRadius: "8px",
+            backgroundColor: `rgba(0, 0, 0, 0.05)`,
+          },
+          "-ms-overflow-style": "none",
+          "scrollbar-width": "none",
+
+          "&::-webkit-scrollbar:horizontal": {
+            height: "20px !important",
+          },
+        }}
       >
         <Breadcrumb
           mb={"1rem"}

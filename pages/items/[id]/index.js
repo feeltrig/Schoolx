@@ -5,7 +5,6 @@ const Somethingindex = () => {
 export default Somethingindex;
 
 export const getStaticprops = (context) => {
-  console.log("this is static");
   const variable = `${context.params.id}`;
 
   return {

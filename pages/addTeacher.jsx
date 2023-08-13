@@ -6,7 +6,7 @@ import CustomInputField from "../components/addTeacher/CustomInputField";
 import CustomSelectField from "../components/CustomSelectField/CustomSelectField";
 import {genderList} from "../StaticData/Teachers/teachers";
 import CustomPhotoInput from "../components/addTeacher/CustomPhotoInput";
-import {useState} from "react";
+import {useMemo, useState} from "react";
 import {toData64URLImage} from "../Funtions/dataFunctions";
 
 const AddTeacher = () => {
@@ -21,67 +21,74 @@ const AddTeacher = () => {
     phone: null,
   };
 
-  const fields = [
-    {
-      title: "First Name",
-      name: "firstName",
-      type: "text",
-      placeholder: "Enter your first name",
-      custom: false,
-    },
-    {
-      title: "Last Name",
-      name: "lastName",
-      type: "text",
-      placeholder: "Enter your last name",
-      custom: false,
-    },
-    {
-      title: "Email",
-      name: "email",
-      type: "email",
-      placeholder: "Enter your emailid",
-      custom: false,
-    },
-    {
-      title: "Phone",
-      name: "phone",
-      type: "number",
-      placeholder: "Enter your phone number",
-      custom: false,
-    },
-    {
-      title: "Gender",
-      name: "gender",
-      type: "gender",
-      placeholder: "Enter your gender",
-      custom: true,
-      customComponent: <CustomSelectField list={genderList} name={"gender"} />,
-    },
-    {
-      title: "Experience",
-      name: "experience",
-      type: "number",
-      placeholder: "Enter your experience as a teacher",
-      custom: false,
-    },
-    {
-      title: "Photo",
-      name: "photo",
-      type: "number",
-      placeholder: "Enter your experience as a teacher",
-      custom: true,
-      customComponent: (
-        <CustomPhotoInput
-          photo={photo}
-          handleChange={(e) => {
-            console.log(e);
-            toData64URLImage(e.target.files[0], setphoto);
-          }}
-        />
-      ),
-    },
-  ];
+  const fields = useMemo(
+    () => [
+      {
+        title: "First Name",
+        name: "firstName",
+        type: "text",
+        placeholder: "Enter your first name",
+        custom: false,
+      },
+      {
+        title: "Last Name",
+        name: "lastName",
+        type: "text",
+        placeholder: "Enter your last name",
+        custom: false,
+      },
+      {
+        title: "Email",
+        name: "email",
+        type: "email",
+        placeholder: "Enter your emailid",
+        custom: false,
+      },
+      {
+        title: "Phone",
+        name: "phone",
+        type: "number",
+        placeholder: "Enter your phone number",
+        custom: false,
+      },
+      {
+        title: "Gender",
+        name: "gender",
+        type: "gender",
+        placeholder: "Enter your gender",
+        custom: true,
+        customComponent: (
+          <CustomSelectField list={genderList} name={"gender"} />
+        ),
+      },
+      {
+        title: "Experience",
+        name: "experience",
+        type: "number",
+        placeholder: "Enter your experience as a teacher",
+        custom: false,
+      },
+      {
+        title: "Photo",
+        name: "photo",
+        type: "number",
+        placeholder: "Enter your experience as a teacher",
+        custom: true,
+        customComponent: (
+          <CustomPhotoInput
+            photo={photo}
+            removePhoto={() => {
+              setphoto(null);
+            }}
+            handleChange={(e) => {
+              toData64URLImage(e.target.files[0], setphoto);
+            }}
+          />
+        ),
+      },
+    ],
+    [photo, genderList]
+  );
 
   return (
     <Container minW={"full"} m={0} p={0}>

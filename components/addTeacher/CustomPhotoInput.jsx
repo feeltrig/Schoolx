@@ -3,7 +3,7 @@ import Image from "next/image";
 import React, {useRef} from "react";
 
 const CustomPhotoInput = (props) => {
-  const {photo, handleChange} = props;
+  const {photo, handleChange, removePhoto} = props;
   const inputref = useRef();
   return (
     <>
@@ -35,6 +35,7 @@ const CustomPhotoInput = (props) => {
             height={200}
           />
           <CloseButton
+            onClick={removePhoto}
             style={{
               position: "absolute",
               right: "1rem",

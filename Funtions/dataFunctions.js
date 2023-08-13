@@ -36,7 +36,6 @@ export const arrayFromLength = (length) => {
 export const toData64URLImage = (file, setstate) => {
   const reader = new FileReader();
   reader.onloadend = () => {
-    console.log(reader.result);
     setstate(reader.result);
   };
   reader.readAsDataURL(file);

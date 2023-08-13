@@ -2,11 +2,21 @@ import {Select} from "@chakra-ui/react";
 import React from "react";
 
 const CustomSelectField = (props) => {
-  const {list, placeholder, onChange, customHandleChange, name} = props;
+  const {
+    list,
+    placeholder,
+    onChange,
+    customHandleChange,
+    handleBlur,
+    name,
+    key,
+  } = props;
   return (
     <Select
+      key={key}
       shadow={"md"}
       bg="white"
+      onBlur={handleBlur}
       onChange={(e) => {
         onChange && onChange(e);
         customHandleChange !== undefined && customHandleChange(name)(e);

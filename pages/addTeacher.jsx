@@ -116,7 +116,7 @@ const AddTeacher = () => {
             .catch((err) => console.log(err));
         }}
       >
-        {({errors, touched, isValid, handleChange, values}) => (
+        {({errors, touched, isValid, handleChange, handleBlur, values}) => (
           <Form>
             <VStack align={"start"}>
               <Flex
@@ -131,6 +131,7 @@ const AddTeacher = () => {
               >
                 {fields.map((fieldItem, fieldItemIndex) => (
                   <CustomInputField
+                    handleBlur={handleBlur}
                     title={fieldItem.title}
                     key={fieldItemIndex}
                     name={fieldItem.name}
@@ -156,7 +157,7 @@ const AddTeacher = () => {
                 SUBMIT
               </Button>
             </VStack>
-            {console.log(values)}
+            {console.log(touched)}
           </Form>
         )}
       </Formik>

@@ -14,10 +14,12 @@ const CustomInputField = (props) => {
     customComponent,
     customHandleChange,
     type,
+    key,
+    handleBlur,
   } = props;
 
   return (
-    <VStack align={"start"} flex={1} minW={"20rem"}>
+    <VStack key={key} align={"start"} flex={1} minW={"20rem"}>
       <Text fontSize={"0.9rem"} as={"label"} htmlFor="firstName">
         {title}
       </Text>
@@ -26,6 +28,7 @@ const CustomInputField = (props) => {
           as={Field}
           id={name}
           name={name}
+          onBlur={handleBlur}
           type={type}
           placeholder={placeholder}
           bgGradient="linear(to-br, white, gray.100)"
@@ -35,6 +38,8 @@ const CustomInputField = (props) => {
       {customField &&
         React.cloneElement(customComponent, {
           customHandleChange: customHandleChange,
+          key: key,
+          handleBlur: handleBlur,
         })}
       <CustomFormError fieldName={name} errors={errors} touchFields={touched} />
     </VStack>

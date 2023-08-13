@@ -5,9 +5,13 @@ import addTeacherSchema from "../Validations/addTeacherSchema";
 import CustomInputField from "../components/addTeacher/CustomInputField";
 import CustomSelectField from "../components/CustomSelectField/CustomSelectField";
 import {genderList} from "../StaticData/Teachers/teachers";
+import CustomPhotoInput from "../components/addTeacher/CustomPhotoInput";
+import {useState} from "react";
+import {toData64URLImage} from "../Funtions/dataFunctions";
 
 const AddTeacher = () => {
   const toast = useToast();
+  const [photo, setphoto] = useState(null);
 
   const initialValues = {
     firstName: "",
@@ -60,6 +64,22 @@ const AddTeacher = () => {
       type: "number",
       placeholder: "Enter your experience as a teacher",
       custom: false,
+    },
+    {
+      title: "Photo",
+      name: "photo",
+      type: "number",
+      placeholder: "Enter your experience as a teacher",
+      custom: true,
+      customComponent: (
+        <CustomPhotoInput
+          photo={photo}
+          handleChange={(e) => {
+            console.log(e);
+            toData64URLImage(e.target.files[0], setphoto);
+          }}
+        />
+      ),
     },
   ];
 

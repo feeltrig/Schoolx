@@ -31,3 +31,13 @@ export const lowerCaseArray = (arrayData) => {
 export const arrayFromLength = (length) => {
   return Array.from({length});
 };
+
+// set data64 image url to state
+export const toData64URLImage = (file, setstate) => {
+  const reader = new FileReader();
+  reader.onloadend = () => {
+    console.log(reader.result);
+    setstate(reader.result);
+  };
+  reader.readAsDataURL(file);
+};

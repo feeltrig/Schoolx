@@ -1,9 +1,10 @@
 import {Center, CloseButton} from "@chakra-ui/react";
 import Image from "next/image";
 import React, {useRef} from "react";
+import CustomFormError from "../CustomFormError/CustomFormError";
 
 const CustomPhotoInput = (props) => {
-  const {photo, handleChange, removePhoto} = props;
+  const {photo, handleChange, removePhoto, errors, touched, name} = props;
   const inputref = useRef();
   return (
     <>
@@ -24,6 +25,11 @@ const CustomPhotoInput = (props) => {
             onChange={handleChange}
             style={{display: "none"}}
           />
+          {/* <CustomFormError
+            fieldName={name}
+            errors={errors}
+            touchFields={touched}
+          /> */}
         </Center>
       )}
       {photo && (

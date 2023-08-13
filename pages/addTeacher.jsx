@@ -8,6 +8,7 @@ import {genderList} from "../StaticData/Teachers/teachers";
 import CustomPhotoInput from "../components/addTeacher/CustomPhotoInput";
 import {useMemo, useState} from "react";
 import {toData64URLImage} from "../Funtions/dataFunctions";
+import CustomTextArea from "../components/CustomTextArea/CustomTextArea";
 
 const AddTeacher = () => {
   const toast = useToast();
@@ -19,6 +20,8 @@ const AddTeacher = () => {
     email: "",
     gender: "",
     phone: null,
+    permanentAddress: "",
+    photo: "",
   };
 
   const fields = useMemo(
@@ -52,6 +55,27 @@ const AddTeacher = () => {
         custom: false,
       },
       {
+        title: "Permanent Address",
+        name: "permanentAddress",
+        type: "textarea",
+        placeholder: "Enter permanent address",
+        custom: true,
+        customComponent: (
+          <CustomTextArea placeholder="Enter permanent address" size="sm" />
+        ),
+      },
+      {
+        title: "Temporary Address",
+        name: "temporaryAddress",
+        type: "textarea",
+        placeholder: "Enter temporary address",
+        custom: true,
+        customComponent: (
+          <CustomTextArea placeholder="Enter temporary address" size="sm" />
+        ),
+      },
+
+      {
         title: "Gender",
         name: "gender",
         type: "gender",
@@ -66,6 +90,13 @@ const AddTeacher = () => {
         name: "experience",
         type: "number",
         placeholder: "Enter your experience as a teacher",
+        custom: false,
+      },
+      {
+        title: "Salary",
+        name: "salary",
+        type: "number",
+        placeholder: "Enter annual salary",
         custom: false,
       },
       {
@@ -157,7 +188,7 @@ const AddTeacher = () => {
                 SUBMIT
               </Button>
             </VStack>
-            {console.log(touched)}
+            {console.log(values)}
           </Form>
         )}
       </Formik>

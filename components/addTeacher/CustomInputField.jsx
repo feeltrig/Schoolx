@@ -35,12 +35,21 @@ const CustomInputField = (props) => {
           shadow={"md"}
         />
       )}
-      {customField &&
-        React.cloneElement(customComponent, {
-          customHandleChange: customHandleChange,
-          key: key,
-          handleBlur: handleBlur,
-        })}
+
+      {customField && (
+        <>
+          {React.cloneElement(customComponent, {
+            customHandleChange: customHandleChange,
+            key: key,
+            handleBlur: handleBlur,
+            placeholder: placeholder,
+            errors: errors,
+            touched,
+            name,
+            id: name,
+          })}
+        </>
+      )}
       <CustomFormError fieldName={name} errors={errors} touchFields={touched} />
     </VStack>
   );

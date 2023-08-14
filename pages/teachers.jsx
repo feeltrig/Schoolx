@@ -25,6 +25,16 @@ export default function Teachers() {
   const [teachers, setteachers] = useState([]);
   const [searchText, setSearchText] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isEditing, setisEditing] = useState(false);
+
+  // handle activate editing
+  const toggleEditOn = (state) => {
+    setisEditing((p) => state);
+  };
+
+  const handleTabToggle = (e) => {
+    e === 1 ? toggleEditOn(true) : toggleEditOn(false);
+  };
 
   // get teachers from api
   useEffect(() => {
@@ -85,6 +95,8 @@ export default function Teachers() {
         noDataHeight={"20rem"}
         customTableStyles={{boxShadow: "0 0 20px 2px rgba(0,0,0,0.1)"}}
         isLoading={isLoading}
+        isEditing={isEditing}
+        handleTabToggle={handleTabToggle}
       />
     </Container>
   );

@@ -42,14 +42,13 @@ const Sidebar = (props) => {
     <Show breakpoint="(min-width: 880px)">
       <Container w={"15rem"} sx={containerStyle}>
         <Box
-          border={"2px solid"}
           h={"5rem"}
           my={"1rem"}
           style={{width: "100%", position: "relative"}}
         >
           <Image
             src={profilePic}
-            alt="Picture of the author"
+            alt="school logo"
             layout="fill"
             objectFit="cover"
           />

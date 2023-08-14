@@ -9,6 +9,8 @@ import {
   Flex,
   Icon,
   HStack,
+  Show,
+  Box,
 } from "@chakra-ui/react";
 import Link from "next/link";
 import {useRouter} from "next/router";
@@ -23,8 +25,6 @@ const Sidebar = (props) => {
   // container style
   const containerStyle = {
     backgroundColor: "white",
-    position: "sticky",
-    fontWeight: 700,
     margin: 0,
     padding: 0,
     paddingBlock: "2rem",
@@ -32,27 +32,87 @@ const Sidebar = (props) => {
     display: "flex",
     flexFlow: "column",
     justifyContent: "start",
-    paddingInline: "2rem",
+    paddingInline: "1rem",
   };
 
   const router = useRouter();
+  console.log(CustomStyleConstants);
 
   return (
-    <Container w={"15rem"} sx={containerStyle}>
-      <Image src={profilePic} alt="Picture of the author" />
-      <Flex flexFlow={"column"} gap="1rem">
-        <Accordion allowToggle>
-          {links.map((items, index) => {
-            if (items.subLinks.length > 0) {
-              // sublinks
-              return (
-                <AccordionItem
-                  key={index}
-                  style={{border: "none"}}
-                  _hover={{boxShadow: CustomStyleConstants["shadow-sm"]}}
-                >
-                  <AccordionButton>
-                    <HStack gap={"1rem"} align={"space-between"}>
+    <Show breakpoint="(min-width: 880px)">
+      <Container w={"15rem"} sx={containerStyle}>
+        <Box
+          border={"2px solid"}
+          h={"5rem"}
+          my={"1rem"}
+          style={{width: "100%", position: "relative"}}
+        >
+          <Image
+            src={profilePic}
+            alt="Picture of the author"
+            layout="fill"
+            objectFit="cover"
+          />
+        </Box>
+        <Flex flexFlow={"column"} gap="1rem" my={"1rem"}>
+          <Accordion allowToggle>
+            {links.map((items, index) => {
+              if (items.subLinks.length > 0) {
+                // sublinks
+                return (
+                  <AccordionItem
+                    key={index}
+                    style={{border: "none"}}
+                    _hover={{boxShadow: CustomStyleConstants["shadow-sm"]}}
+                  >
+                    <AccordionButton>
+                      <HStack gap={"1rem"} justify={"space-between"} w={"full"}>
+                        <Link
+                          href={items.path}
+                          className={
+                            router.pathname == items.path ? "activeLink" : ""
+                          }
+                        >
+                          <Flex alignItems={"center"} gap={"1rem"}>
+                            <Icon color={"black"} as={items.iconName} />
+                            <p>{items.title.toString()}</p>
+                          </Flex>
+                        </Link>
+                        <AccordionIcon />
+                      </HStack>
+                    </AccordionButton>
+                    <AccordionPanel py={"1rem"}>
+                      {items.subLinks.map((sublink, sublinkindex) => (
+                        <AccordionButton>
+                          <Link
+                            key={sublinkindex}
+                            href={sublink.path}
+                            className={
+                              router.pathname == sublink.path
+                                ? "activeLink"
+                                : ""
+                            }
+                          >
+                            <Flex alignItems={"center"} gap={"1rem"}>
+                              <Icon color={"black"} as={sublink.iconName} />
+                              <p style={{fontWeight: "normal"}}>
+                                {sublink.title.toString()}
+                              </p>
+                            </Flex>
+                          </Link>
+                        </AccordionButton>
+                      ))}
+                    </AccordionPanel>
+                  </AccordionItem>
+                );
+              } else {
+                return (
+                  <AccordionItem
+                    _hover={{boxShadow: CustomStyleConstants["shadow-sm"]}}
+                    key={index}
+                    style={{border: "none"}}
+                  >
+                    <AccordionButton>
                       <Link
                         href={items.path}
                         className={
@@ -64,58 +124,14 @@ const Sidebar = (props) => {
                           <p>{items.title.toString()}</p>
                         </Flex>
                       </Link>
-                      <AccordionIcon />
-                    </HStack>
-                  </AccordionButton>
-                  <AccordionPanel p={0} py={"1rem"} bg={"gray.100"}>
-                    {items.subLinks.map((sublink, sublinkindex) => (
-                      <AccordionButton>
-                        <Link
-                          key={sublinkindex}
-                          href={sublink.path}
-                          className={
-                            router.pathname == sublink.path ? "activeLink" : ""
-                          }
-                        >
-                          <Flex alignItems={"center"} gap={"1rem"}>
-                            <Icon color={"black"} as={sublink.iconName} />
-                            <p style={{fontWeight: "normal"}}>
-                              {sublink.title.toString()}
-                            </p>
-                          </Flex>
-                        </Link>
-                      </AccordionButton>
-                    ))}
-                  </AccordionPanel>
-                </AccordionItem>
-              );
-            } else {
-              return (
-                <AccordionItem
-                  _hover={{boxShadow: CustomStyleConstants["shadow-sm"]}}
-                  key={index}
-                  style={{border: "none"}}
-                >
-                  <AccordionButton>
-                    <Link
-                      href={items.path}
-                      className={
-                        router.pathname == items.path ? "activeLink" : ""
-                      }
-                    >
-                      <Flex alignItems={"center"} gap={"1rem"}>
-                        <Icon color={"black"} as={items.iconName} />
-                        <p>{items.title.toString()}</p>
-                      </Flex>
-                    </Link>
-                  </AccordionButton>
-                </AccordionItem>
-              );
-            }
-          })}
-        </Accordion>
+                    </AccordionButton>
+                  </AccordionItem>
+                );
+              }
+            })}
+          </Accordion>
 
-        {/* {links.map((items, index) => {
+          {/* {links.map((items, index) => {
           return (
             <div
               key={index}
@@ -135,8 +151,9 @@ const Sidebar = (props) => {
             </div>
           );
         })} */}
-      </Flex>
-    </Container>
+        </Flex>
+      </Container>
+    </Show>
   );
 };
 

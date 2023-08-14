@@ -1,4 +1,11 @@
-import {Button, Container, Flex, useToast, VStack} from "@chakra-ui/react";
+import {
+  Button,
+  Container,
+  Flex,
+  Heading,
+  useToast,
+  VStack,
+} from "@chakra-ui/react";
 import {Form, Formik} from "formik";
 import AxiosInstance from "../service/axiosInstance";
 import addTeacherSchema from "../Validations/addTeacherSchema";
@@ -122,6 +129,7 @@ const AddTeacher = () => {
 
   return (
     <Container minW={"full"} m={0} p={0}>
+      <Heading my={"1rem"}>Add Teacher</Heading>
       <Formik
         initialValues={initialValues}
         validateOnChange={true}

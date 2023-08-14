@@ -13,7 +13,7 @@ import {useEffect, useState} from "react";
 
 export default function Parents() {
   // table headers
-  const excludeHeader = ["id"];
+  const excludeHeader = ["id", "address", "gender", "child"];
   const headers = excludeStringFieldsArray(
     Object.keys(fakeDb[0]),
     excludeHeader

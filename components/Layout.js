@@ -13,6 +13,7 @@ import {
   FaAngleRight,
   FaPlus,
   FaCog,
+  FaChartBar,
 } from "react-icons/fa";
 
 import Sidebar from "../components/Sidebar/Sidebar";
@@ -20,8 +21,8 @@ import Sidebar from "../components/Sidebar/Sidebar";
 const Layout = ({children}) => {
   const links = [
     {
-      iconName: FaHome,
-      title: "Home",
+      iconName: FaChartBar,
+      title: "Dashboard",
       path: "/",
       subLinks: [],
     },
@@ -94,7 +95,7 @@ const Layout = ({children}) => {
           },
         }}
       >
-        <Breadcrumb
+        {/* <Breadcrumb
           mb={"1rem"}
           spacing="8px"
           separator={<FaAngleRight color="gray.200" />}
@@ -110,7 +111,7 @@ const Layout = ({children}) => {
           <BreadcrumbItem isCurrentPage>
             <BreadcrumbLink href="#">Contact</BreadcrumbLink>
           </BreadcrumbItem>
-        </Breadcrumb>
+        </Breadcrumb> */}
         {children}
       </Container>
     </div>

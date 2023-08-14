@@ -11,6 +11,7 @@ annoucement pages
 bulk addition with csv
 pdf for report card
 id card generator
+multiple editing in tables
 
 <!-- backend -->
 

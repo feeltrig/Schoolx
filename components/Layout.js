@@ -23,7 +23,7 @@ const Layout = ({children}) => {
     {
       iconName: FaChartBar,
       title: "Dashboard",
-      path: "/",
+      path: "/dashboard",
       subLinks: [],
     },
     {

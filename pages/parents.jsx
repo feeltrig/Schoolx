@@ -5,9 +5,10 @@ import Router from "next/router";
 import fakeDb from "../fakeDb/parents.json";
 import {gotoPageWithData} from "../Funtions/routingFunctions";
 import {
-  clearSearchFilter,
+  addIsCheckedFieldArray,
   clearStringState,
   excludeStringFieldsArray,
+  initializeState,
 } from "../Funtions/dataFunctions";
 import {useEffect, useState} from "react";
 
@@ -21,7 +22,7 @@ export default function Parents() {
 
   // parents state
   // search state
-  const [parents, setparents] = useState(fakeDb);
+  const [parents, setparents] = useState(addIsCheckedFieldArray(fakeDb));
   const [searchText, setSearchText] = useState("");
 
   // goto parents detail page
@@ -34,7 +35,7 @@ export default function Parents() {
     if (searchText !== "") {
       searchParent(searchText, setparents, fakeDb);
     } else {
-      clearSearchFilter(fakeDb, setparents);
+      initializeState(fakeDb, setparents);
     }
   }, [searchText]);
 

@@ -85,7 +85,7 @@ export default function Teachers() {
   useEffect(() => {
     setteacherState((obj) => ({...obj, isLoading: true}));
     setTimeout(() => {
-      setteachers(fakeDb.map((i) => ({...i, isChecked: false})));
+      setteachers(addIsCheckedFieldArray(fakeDb));
       setteacherState((obj) => ({...obj, isLoading: false}));
     }, 5000);
   }, []);
@@ -99,13 +99,9 @@ export default function Teachers() {
   useEffect(() => {
     if (!teacherState.isLoading) {
       if (searchText !== "") {
-        searchTeacher(
-          searchText,
-          setteachers,
-          fakeDb.map((i) => ({...i, isChecked: false}))
-        );
+        searchTeacher(searchText, setteachers, addIsCheckedFieldArray(fakeDb));
       } else {
-        initializeState(fakeDb, setteachers);
+        initializeState(addIsCheckedFieldArray(fakeDb), setteachers);
       }
     }
   }, [searchText]);

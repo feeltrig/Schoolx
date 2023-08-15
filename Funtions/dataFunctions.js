@@ -93,3 +93,7 @@ export const getAllItemsWithConditionArray = (arr, fieldName, isEqualTo) => {
 export const someArrayItemsFullfill = (arr, fieldName, isEqualTo) => {
   return arr.some((arrItem) => arrItem[fieldName] === isEqualTo);
 };
+
+// add isChecked to array
+export const addIsCheckedFieldArray = (arr) =>
+  arr.map((arrItem) => ({...arrItem, isChecked: false}));

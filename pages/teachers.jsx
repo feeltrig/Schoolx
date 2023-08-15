@@ -1,13 +1,18 @@
-import {Container, Divider} from "@chakra-ui/react";
+import {Container} from "@chakra-ui/react";
 import CustomTable from "../components/CustomTable/CustomTable";
 import SearchBar from "../components/parents/SearchBar";
 import Router from "next/router";
 import fakeDb from "../fakeDb/students.json";
 import {useEffect, useState} from "react";
 import {
-  clearSearchFilter,
+  initializeState,
   clearStringState,
   excludeStringFieldsArray,
+  toggleObjectState,
+  toggleState,
+  setFieldValueAllArray,
+  setSingleItemInArrayByField,
+  getAllItemsWithConditionArray,
 } from "../Funtions/dataFunctions";
 import {gotoPageWithData} from "../Funtions/routingFunctions";
 
@@ -21,46 +26,72 @@ export default function Teachers() {
 
   // teacher state
   // search state
-  // loading state
+  // editing state
   const [teachers, setteachers] = useState([]);
   const [searchText, setSearchText] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-  const [isEditing, setisEditing] = useState(false);
+  const [teacherState, setteacherState] = useState({
+    teachers: [],
+    searchText: "",
+    isLoading: false,
+    isEditing: false,
+  });
 
-  // handle activate editing
-  const toggleEditOn = (state) => {
-    setisEditing((p) => state);
+  // handle editing toggle
+  const handleTabToggle = (e) => {
+    e === 1
+      ? toggleObjectState(setteacherState, "isEditing", true)
+      : toggleObjectState(setteacherState, "isEditing", false);
   };
 
-  const handleTabToggle = (e) => {
-    e === 1 ? toggleEditOn(true) : toggleEditOn(false);
+  // handle single checkbox change
+  const singleCheckboxOnChange = (data, e) => {
+    setSingleItemInArrayByField(
+      setteachers,
+      "isChecked",
+      e.target.checked,
+      "id",
+      data.id
+    );
+  };
+
+  // select all teachers
+  const checkAllFields = (e) => {
+    setFieldValueAllArray(setteachers, "isChecked", e.target.checked);
+  };
+
+  // delete selected teachers
+  const handleDeleteSelected = () => {
+    console.log(getAllItemsWithConditionArray(teachers, "isChecked", false));
+    setteachers((prev) =>
+      getAllItemsWithConditionArray(prev, "isChecked", false)
+    );
   };
 
   // get teachers from api
   useEffect(() => {
-    setIsLoading(true);
+    setteacherState((obj) => ({...obj, isLoading: true}));
     setTimeout(() => {
-      setteachers(fakeDb);
-      setIsLoading(false);
+      setteachers(fakeDb.map((i) => ({...i, isChecked: false})));
+      setteacherState((obj) => ({...obj, isLoading: false}));
     }, 5000);
   }, []);
 
   // goto teachers detail page
   const openTeacherDetails = (data) => {
-    // Router.push({
-    //   pathname: "/teacherDetails",
-    //   query: data,
-    // });
     gotoPageWithData(Router, "/teacherDetails", data);
   };
 
   // search teachers on search text change
   useEffect(() => {
-    if (!isLoading) {
+    if (!teacherState.isLoading) {
       if (searchText !== "") {
-        searchTeacher(searchText, setteachers, fakeDb);
+        searchTeacher(
+          searchText,
+          setteachers,
+          fakeDb.map((i) => ({...i, isChecked: false}))
+        );
       } else {
-        clearSearchFilter(fakeDb, setteachers);
+        initializeState(fakeDb, setteachers);
       }
     }
   }, [searchText]);
@@ -85,7 +116,7 @@ export default function Teachers() {
         clearvalue={() => clearStringState(setSearchText)}
         inputStyles={{boxShadow: "0 0 20px 2px rgba(0,0,0,0.1)"}}
         placeholder={"Search teachers"}
-        disabled={isLoading}
+        disabled={teacherState.isLoading}
       />
       <CustomTable
         headers={headers}
@@ -94,9 +125,12 @@ export default function Teachers() {
         textColor={"white"}
         noDataHeight={"20rem"}
         customTableStyles={{boxShadow: "0 0 20px 2px rgba(0,0,0,0.1)"}}
-        isLoading={isLoading}
-        isEditing={isEditing}
+        isLoading={teacherState.isLoading}
+        isEditing={teacherState.isEditing}
         handleTabToggle={handleTabToggle}
+        checkboxOnChange={singleCheckboxOnChange}
+        checkAllFields={checkAllFields}
+        handleDeleteSelected={handleDeleteSelected}
       />
     </Container>
   );

@@ -1,8 +1,8 @@
 import {
   Box,
+  Button,
   Checkbox,
-  Skeleton,
-  Stack,
+  HStack,
   Tab,
   Table,
   TableContainer,
@@ -14,7 +14,6 @@ import {
   Thead,
   Tr,
 } from "@chakra-ui/react";
-import {arrayFromLength} from "../../Funtions/dataFunctions";
 import CustomNoData from "../CustomNoData/CustomNoData";
 import CustomTableSkeleton from "./CustomTableSkeleton";
 
@@ -29,6 +28,9 @@ export default function CustomTable(props) {
     isLoading,
     isEditing,
     handleTabToggle,
+    checkboxOnChange,
+    checkAllFields,
+    handleDeleteSelected,
   } = props;
 
   const skeletonLines = 6;
@@ -36,12 +38,32 @@ export default function CustomTable(props) {
   return (
     <>
       <Box my={"2rem"}>
-        <Tabs onChange={handleTabToggle} isManual variant="unstyled">
-          <TabList>
-            <Tab _selected={{color: "white", bg: "teal.500"}}>Show All</Tab>
-            <Tab _selected={{color: "white", bg: "teal.500"}}>Edit</Tab>
-          </TabList>
-        </Tabs>
+        <HStack justify={"space-between"}>
+          <Tabs onChange={handleTabToggle} isManual variant="unstyled">
+            <TabList>
+              <Tab
+                isDisabled={data && data.length < 1}
+                _selected={{color: "white", bg: "teal.500"}}
+              >
+                Show All
+              </Tab>
+              <Tab
+                isDisabled={data && data.length < 1}
+                _selected={{color: "white", bg: "teal.500"}}
+              >
+                Edit
+              </Tab>
+            </TabList>
+          </Tabs>
+          <Button
+            disabled={data && data.length < 1}
+            onClick={handleDeleteSelected}
+            size={"sm"}
+            m={"0.2rem"}
+          >
+            Delete Selected
+          </Button>
+        </HStack>
         <TableContainer
           overflowY={
             (data && data.length < 1) || isLoading ? "hidden" : "scroll"
@@ -68,73 +90,84 @@ export default function CustomTable(props) {
             },
           }}
         >
-
           {/* loading state */}
           {isLoading ? (
             <CustomTableSkeleton skeletonLines={skeletonLines} />
           ) : (
-           
-            <Table variant="simple">
-              <Thead>
-                <Tr
-                  style={{
-                    background: "gray.200",
-                    fontWeight: 900,
-                    boxShadow: "0 0 5px 1px rgba(0,0,0,0.3)",
-                    color: "black",
-                  }}
-                >
-                  {isEditing && (
-                    <Th>
-                      <Checkbox defaultChecked></Checkbox>
-                    </Th>
-                  )}
-                  {headers.map((header, headerIndex) => (
-                    <Th key={headerIndex}>{header.replaceAll("_", " ")}</Th>
-                  ))}
-                </Tr>
-              </Thead>
-              <Tbody>
-                {data &&
-                  data.map((teacher, teacherIndex) => (
-                    <Tr
-                      key={teacherIndex}
-                      _hover={{
-                        background: "gray.100",
-                        color: "gray.800",
-                        cursor: "pointer",
-                      }}
-                      onClick={() => onClick && onClick(teacher)}
-                    >
-                      {isEditing && (
-                        <Td>
-                          <Checkbox defaultChecked></Checkbox>
-                        </Td>
-                      )}
-                      {headers.map((header, headerIndex) => (
-                        <Td key={headerIndex}>{teacher[header]}</Td>
-                      ))}
-                    </Tr>
-                  ))}
+            data &&
+            data.length > 0 && (
+              <Table variant="simple">
+                <Thead>
+                  <Tr
+                    style={{
+                      background: "gray.200",
+                      fontWeight: 900,
+                      boxShadow: "0 0 5px 1px rgba(0,0,0,0.3)",
+                      color: "black",
+                    }}
+                  >
+                    {isEditing && (
+                      <Th>
+                        <Checkbox
+                          onChange={(e) => {
+                            checkAllFields(e);
+                          }}
+                        ></Checkbox>
+                      </Th>
+                    )}
+                    {headers.map((header, headerIndex) => (
+                      <Th key={headerIndex}>{header.replaceAll("_", " ")}</Th>
+                    ))}
+                  </Tr>
+                </Thead>
+                <Tbody>
+                  {data &&
+                    data.map((teacher, teacherIndex) => (
+                      <Tr
+                        key={teacherIndex}
+                        _hover={{
+                          background: "gray.100",
+                          color: "gray.800",
+                          cursor: "pointer",
+                        }}
+                        onClick={() =>
+                          !isEditing && onClick && onClick(teacher)
+                        }
+                      >
+                        {isEditing && (
+                          <Td>
+                            <Checkbox
+                              value={teacher}
+                              isChecked={teacher.isChecked}
+                              onChange={(e) => checkboxOnChange(teacher, e)}
+                            ></Checkbox>
+                          </Td>
+                        )}
+                        {headers.map((header, headerIndex) => (
+                          <Td key={headerIndex}>{teacher[header]}</Td>
+                        ))}
+                      </Tr>
+                    ))}
 
-                {/* custom key value table */}
-                {customData !== undefined &&
-                  customData.map((custom, customIndex) => (
-                    <Tr
-                      key={customIndex}
-                      _hover={{color: "black", cursor: "pointer"}}
-                      onClick={() => onClick && onClick(custom)}
-                    >
-                      {Object.keys(custom)[0] !== "id" && (
-                        <>
-                          <Td>{Object.keys(custom)[0].replace("_", " ")}</Td>
-                          <Td>{Object.values(custom)}</Td>
-                        </>
-                      )}
-                    </Tr>
-                  ))}
-              </Tbody>
-            </Table>
+                  {/* custom key value table */}
+                  {customData !== undefined &&
+                    customData.map((custom, customIndex) => (
+                      <Tr
+                        key={customIndex}
+                        _hover={{color: "black", cursor: "pointer"}}
+                        onClick={() => onClick && onClick(custom)}
+                      >
+                        {Object.keys(custom)[0] !== "id" && (
+                          <>
+                            <Td>{Object.keys(custom)[0].replace("_", " ")}</Td>
+                            <Td>{Object.values(custom)}</Td>
+                          </>
+                        )}
+                      </Tr>
+                    ))}
+                </Tbody>
+              </Table>
+            )
           )}
         </TableContainer>
 

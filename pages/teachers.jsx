@@ -9,16 +9,22 @@ import {
   clearStringState,
   excludeStringFieldsArray,
   toggleObjectState,
-  toggleState,
   setFieldValueAllArray,
   setSingleItemInArrayByField,
+  addIsCheckedFieldArray,
   getAllItemsWithConditionArray,
 } from "../Funtions/dataFunctions";
 import {gotoPageWithData} from "../Funtions/routingFunctions";
 import CustomModal from "../components/CustomModal/CustomModal";
+import {stringsConstants} from "../Utils/stringsConstants";
 
 export default function Teachers() {
+  const awd = () => {
+    alert("awdaw");
+  };
+
   // table headers
+  // delete modal buttons
   const excludeHeader = ["id"];
   const headers = excludeStringFieldsArray(
     Object.keys(fakeDb[0]),
@@ -36,6 +42,7 @@ export default function Teachers() {
     isLoading: false,
     isEditing: false,
     deleteModalOpen: false,
+    tempTeacherData: {},
   });
 
   // handle editing toggle
@@ -56,6 +63,8 @@ export default function Teachers() {
     );
   };
 
+  console.log(teacherState);
+
   // select all teachers
   const checkAllFields = (e) => {
     setFieldValueAllArray(setteachers, "isChecked", e.target.checked);
@@ -71,6 +80,18 @@ export default function Teachers() {
     // setteachers((prev) =>
     //   getAllItemsWithConditionArray(prev, "isChecked", false)
     // );
+  };
+
+  // delete on confirm records
+  const handleDeleteRecords = () => {
+    setteachers((prev) =>
+      getAllItemsWithConditionArray(prev, "isChecked", false)
+    );
+    toggleObjectState(
+      setteacherState,
+      "deleteModalOpen",
+      !teacherState.deleteModalOpen
+    );
   };
 
   const toggleDeleteModal = () => {
@@ -118,6 +139,14 @@ export default function Teachers() {
     );
   };
 
+  // SECOND INITIALIZATIONS
+  const deleteModalButtons = [
+    {
+      title: "Delete",
+      onClick: handleDeleteRecords,
+    },
+  ];
+
   return (
     <Container minW={"100%"} m="0" p="0">
       <SearchBar
@@ -146,7 +175,8 @@ export default function Teachers() {
         title={"Delete"}
         isOpen={teacherState.deleteModalOpen}
         handleClose={toggleDeleteModal}
-        bodyContent={"Are you sure you want to delete selected records?"}
+        bodyContent={stringsConstants.DELETERECORDS}
+        buttonArray={deleteModalButtons}
       />
     </Container>
   );

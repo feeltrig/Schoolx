@@ -28,7 +28,9 @@ const CustomModal = (props) => {
                   key={btnItemIndex}
                   colorScheme="blue"
                   mr={3}
-                  onClick={btnItem.onClick && btnItem.onClick}
+                  onClick={() => {
+                    btnItem.onClick && btnItem.onClick();
+                  }}
                 >
                   {btnItem.title}
                 </Button>

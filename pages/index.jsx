@@ -2,19 +2,13 @@ import {
   Box,
   Container,
   Heading,
-  HStack,
   Text,
   VStack,
-  Input,
-  InputLeftElement,
-  InputGroup,
-  Icon,
+  Card,
+  CardBody,
 } from "@chakra-ui/react";
 import Head from "next/head";
-
-import {FaSearch} from "react-icons/fa";
-
-import ItemCard from "../components/ItemCard/ItemCard";
+import {CustomCardUI} from "../components/CustomCard/CustomCardCmp";
 
 export default function Items({mainState}) {
   return (
@@ -27,6 +21,18 @@ export default function Items({mainState}) {
         <Text as={"b"} fontSize="4xl">
           Welcome to schoolx
         </Text>
+        <VStack align={"start"}>
+          <Heading>Upcoming Events</Heading>
+          {/* <CustomCardUI /> */}
+          <Card>
+            <CardBody>
+              <Text>
+                View a summary of all your customers over the last month.
+              </Text>
+            </CardBody>
+          </Card>
+          <Heading>Announcements</Heading>
+        </VStack>
       </Container>
     </div>
   );

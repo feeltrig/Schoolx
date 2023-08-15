@@ -14,6 +14,7 @@ import {
   Thead,
   Tr,
 } from "@chakra-ui/react";
+import {someArrayItemsFullfill} from "../../Funtions/dataFunctions";
 import CustomNoData from "../CustomNoData/CustomNoData";
 import CustomTableSkeleton from "./CustomTableSkeleton";
 
@@ -31,6 +32,7 @@ export default function CustomTable(props) {
     checkboxOnChange,
     checkAllFields,
     handleDeleteSelected,
+    tabsDisableCondition,
   } = props;
 
   const skeletonLines = 6;
@@ -38,32 +40,41 @@ export default function CustomTable(props) {
   return (
     <>
       <Box my={"2rem"}>
-        <HStack justify={"space-between"}>
-          <Tabs onChange={handleTabToggle} isManual variant="unstyled">
-            <TabList>
-              <Tab
-                isDisabled={data && data.length < 1}
-                _selected={{color: "white", bg: "teal.500"}}
-              >
-                Show All
-              </Tab>
-              <Tab
-                isDisabled={data && data.length < 1}
-                _selected={{color: "white", bg: "teal.500"}}
-              >
-                Edit
-              </Tab>
-            </TabList>
-          </Tabs>
-          <Button
-            disabled={data && data.length < 1}
-            onClick={handleDeleteSelected}
-            size={"sm"}
-            m={"0.2rem"}
-          >
-            Delete Selected
-          </Button>
-        </HStack>
+        {!isLoading && (
+          <HStack justify={"space-between"}>
+            <Tabs onChange={handleTabToggle} isManual variant="unstyled">
+              <TabList>
+                <Tab
+                  isDisabled={(data && data.length < 1) || tabsDisableCondition}
+                  _selected={{color: "white", bg: "teal.500"}}
+                >
+                  Show All
+                </Tab>
+                <Tab
+                  isDisabled={(data && data.length < 1) || tabsDisableCondition}
+                  _selected={{color: "white", bg: "teal.500"}}
+                >
+                  Edit
+                </Tab>
+              </TabList>
+            </Tabs>
+            <Button
+              disabled={
+                (data && data.length < 1) ||
+                !someArrayItemsFullfill(
+                  data && data,
+                  "isChecked",
+                  true || tabsDisableCondition
+                )
+              }
+              onClick={handleDeleteSelected}
+              size={"sm"}
+              m={"0.2rem"}
+            >
+              Delete Selected
+            </Button>
+          </HStack>
+        )}
         <TableContainer
           overflowY={
             (data && data.length < 1) || isLoading ? "hidden" : "scroll"

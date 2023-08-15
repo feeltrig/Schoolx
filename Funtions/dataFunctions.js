@@ -83,8 +83,13 @@ export const setSingleItemInArrayByField = (
 };
 
 // get all items from array with condition
-export const getAllItemsWithConditionArray = (arr, fieldName, isEqualsTo) => {
+export const getAllItemsWithConditionArray = (arr, fieldName, isEqualTo) => {
   return arr.filter((arrItem) => {
-    return arrItem[fieldName] === isEqualsTo;
+    return arrItem[fieldName] === isEqualTo;
   });
+};
+
+// check for condition fullfilled by any one item
+export const someArrayItemsFullfill = (arr, fieldName, isEqualTo) => {
+  return arr.some((arrItem) => arrItem[fieldName] === isEqualTo);
 };

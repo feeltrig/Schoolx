@@ -15,6 +15,7 @@ import {
   getAllItemsWithConditionArray,
 } from "../Funtions/dataFunctions";
 import {gotoPageWithData} from "../Funtions/routingFunctions";
+import CustomModal from "../components/CustomModal/CustomModal";
 
 export default function Teachers() {
   // table headers
@@ -34,6 +35,7 @@ export default function Teachers() {
     searchText: "",
     isLoading: false,
     isEditing: false,
+    deleteModalOpen: false,
   });
 
   // handle editing toggle
@@ -61,9 +63,21 @@ export default function Teachers() {
 
   // delete selected teachers
   const handleDeleteSelected = () => {
-    console.log(getAllItemsWithConditionArray(teachers, "isChecked", false));
-    setteachers((prev) =>
-      getAllItemsWithConditionArray(prev, "isChecked", false)
+    toggleObjectState(
+      setteacherState,
+      "deleteModalOpen",
+      !teacherState.deleteModalOpen
+    );
+    // setteachers((prev) =>
+    //   getAllItemsWithConditionArray(prev, "isChecked", false)
+    // );
+  };
+
+  const toggleDeleteModal = () => {
+    toggleObjectState(
+      setteacherState,
+      "deleteModalOpen",
+      !teacherState.deleteModalOpen
     );
   };
 
@@ -131,6 +145,12 @@ export default function Teachers() {
         checkboxOnChange={singleCheckboxOnChange}
         checkAllFields={checkAllFields}
         handleDeleteSelected={handleDeleteSelected}
+      />
+      <CustomModal
+        title={"Delete"}
+        isOpen={teacherState.deleteModalOpen}
+        handleClose={toggleDeleteModal}
+        bodyContent={"Are you sure you want to delete selected records?"}
       />
     </Container>
   );

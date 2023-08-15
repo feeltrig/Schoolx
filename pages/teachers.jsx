@@ -19,10 +19,6 @@ import CustomModal from "../components/CustomModal/CustomModal";
 import {stringsConstants} from "../Utils/stringsConstants";
 
 export default function Teachers() {
-  const awd = () => {
-    alert("awdaw");
-  };
-
   // table headers
   // delete modal buttons
   const excludeHeader = ["id"];
@@ -108,7 +104,7 @@ export default function Teachers() {
     setTimeout(() => {
       setteachers(addIsCheckedFieldArray(fakeDb));
       setteacherState((obj) => ({...obj, isLoading: false}));
-    }, 5000);
+    }, 2000);
   }, []);
 
   // goto teachers detail page
@@ -144,6 +140,10 @@ export default function Teachers() {
     {
       title: "Delete",
       onClick: handleDeleteRecords,
+    },
+    {
+      title: "Cancel",
+      onClick: handleDeleteSelected,
     },
   ];
 

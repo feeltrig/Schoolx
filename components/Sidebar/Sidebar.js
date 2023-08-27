@@ -63,7 +63,11 @@ const Sidebar = (props) => {
                     style={{border: "none"}}
                     _hover={{boxShadow: CustomStyleConstants["shadow-sm"]}}
                   >
-                    <AccordionButton>
+                    <AccordionButton
+                      _hover={{
+                        bg: "white",
+                      }}
+                    >
                       <HStack gap={"1rem"} justify={"space-between"} w={"full"}>
                         <Link
                           href={items.path}
@@ -81,7 +85,12 @@ const Sidebar = (props) => {
                     </AccordionButton>
                     <AccordionPanel py={"1rem"}>
                       {items.subLinks.map((sublink, sublinkindex) => (
-                        <AccordionButton>
+                        <AccordionButton
+                          _hover={{
+                            boxShadow: CustomStyleConstants["shadow-sm"],
+                            bg: "white",
+                          }}
+                        >
                           <Link
                             key={sublinkindex}
                             href={sublink.path}
@@ -105,24 +114,25 @@ const Sidebar = (props) => {
                 );
               } else {
                 return (
-                  <AccordionItem
-                    _hover={{boxShadow: CustomStyleConstants["shadow-sm"]}}
-                    key={index}
-                    style={{border: "none"}}
-                  >
-                    <AccordionButton>
-                      <Link
-                        href={items.path}
-                        className={
-                          router.pathname == items.path ? "activeLink" : ""
-                        }
+                  <AccordionItem key={index} style={{border: "none"}}>
+                    <Link
+                      href={items.path}
+                      className={
+                        router.pathname == items.path ? "activeLink" : ""
+                      }
+                    >
+                      <AccordionButton
+                        _hover={{
+                          boxShadow: CustomStyleConstants["shadow-sm"],
+                          bg: "white",
+                        }}
                       >
                         <Flex alignItems={"center"} gap={"1rem"}>
                           <Icon color={"black"} as={items.iconName} />
                           <p>{items.title.toString()}</p>
                         </Flex>
-                      </Link>
-                    </AccordionButton>
+                      </AccordionButton>
+                    </Link>
                   </AccordionItem>
                 );
               }

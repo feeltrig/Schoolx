@@ -1,12 +1,10 @@
-import {Button, Center, Container, Input, Text} from "@chakra-ui/react";
+import {Container} from "@chakra-ui/react";
 import Head from "next/head";
-import {useSession, signIn, signOut} from "next-auth/react";
+import {useSession, signIn} from "next-auth/react";
 import {useEffect} from "react";
-import {useRouter} from "next/router";
 
 export default function Items({mainState}) {
   const {status} = useSession();
-  const router = useRouter();
 
   useEffect(() => {
     if (status !== "authenticated") {

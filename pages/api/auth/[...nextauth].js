@@ -2,9 +2,6 @@ import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
 export const authOptions = {
-  pages: {
-    signIn: "/auth/login",
-  },
   // Configure one or more authentication providers
   providers: [
     CredentialsProvider({
@@ -43,6 +40,9 @@ export const authOptions = {
       },
     }),
   ],
+  pages: {
+    signIn: "/authpages/login",
+  },
 };
 
 export default NextAuth(authOptions);

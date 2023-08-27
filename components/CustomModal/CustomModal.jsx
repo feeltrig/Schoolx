@@ -14,7 +14,6 @@ import React from "react";
 const CustomModal = (props) => {
   const {isOpen, handleClose, title, bodyContent, buttonArray, size, imageurl} =
     props;
-  console.log(props);
   return (
     <>
       <Modal isOpen={isOpen} onClose={handleClose} size={size && size}>

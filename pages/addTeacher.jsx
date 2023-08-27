@@ -137,7 +137,6 @@ const AddTeacher = () => {
         onSubmit={async (values) => {
           AxiosInstance.post("addTeacher", values)
             .then((res) => {
-              console.log(res);
               toast({
                 position: "top-right",
                 title: res.data.message,
@@ -195,7 +194,6 @@ const AddTeacher = () => {
                 SUBMIT
               </Button>
             </VStack>
-            {console.log(values)}
           </Form>
         )}
       </Formik>

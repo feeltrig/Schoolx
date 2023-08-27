@@ -36,7 +36,6 @@ const Sidebar = (props) => {
   };
 
   const router = useRouter();
-  console.log(CustomStyleConstants);
 
   return (
     <Show breakpoint="(min-width: 880px)">

@@ -1,24 +1,20 @@
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  Container,
-} from "@chakra-ui/react";
-import React from "react";
+import {Container} from "@chakra-ui/react";
+import React, {useEffect, useState} from "react";
 import {
   FaChalkboardTeacher,
   FaChild,
-  FaHome,
   FaUsers,
-  FaAngleRight,
   FaPlus,
   FaCog,
   FaChartBar,
 } from "react-icons/fa";
+import {useRouter} from "next/router";
 
 import Sidebar from "../components/Sidebar/Sidebar";
 
 const Layout = ({children}) => {
+  const router = useRouter();
+  const [showSideBar, setshowSideBar] = useState(true);
   const links = [
     {
       iconName: FaChartBar,
@@ -62,6 +58,16 @@ const Layout = ({children}) => {
       subLinks: [],
     },
   ];
+  const noSidebarUrls = ["login", "register"];
+
+  // check urls to show/hide sidebar
+  useEffect(() => {
+    for (let linkTags of noSidebarUrls) {
+      if (router.asPath.includes(linkTags)) {
+        setshowSideBar(false);
+      }
+    }
+  }, [router.events]);
 
   return (
     <div
@@ -70,12 +76,13 @@ const Layout = ({children}) => {
         justifyContent: "space-between",
         flexGrow: 1,
         maxHeight: "100vh",
+        backgroundColor: "white",
       }}
     >
-      <Sidebar links={links} />
+      {showSideBar && <Sidebar links={links} />}
       <Container
         bgGradient="linear(to-br, gray.300, gray.400)"
-        maxW={"calc(100vw - 15rem)"}
+        maxW={showSideBar ? "calc(100vw - 15rem)" : "100vw"}
         m={0}
         p={"2rem"}
         minH={"100vh"}
@@ -95,23 +102,6 @@ const Layout = ({children}) => {
           },
         }}
       >
-        {/* <Breadcrumb
-          mb={"1rem"}
-          spacing="8px"
-          separator={<FaAngleRight color="gray.200" />}
-        >
-          <BreadcrumbItem>
-            <BreadcrumbLink href="#">Home</BreadcrumbLink>
-          </BreadcrumbItem>
-
-          <BreadcrumbItem>
-            <BreadcrumbLink href="#">About</BreadcrumbLink>
-          </BreadcrumbItem>
-
-          <BreadcrumbItem isCurrentPage>
-            <BreadcrumbLink href="#">Contact</BreadcrumbLink>
-          </BreadcrumbItem>
-        </Breadcrumb> */}
         {children}
       </Container>
     </div>

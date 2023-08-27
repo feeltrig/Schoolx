@@ -1,5 +1,6 @@
 import {
   Button,
+  Image,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -11,14 +12,26 @@ import {
 import React from "react";
 
 const CustomModal = (props) => {
-  const {isOpen, handleClose, title, bodyContent, buttonArray} = props;
+  const {isOpen, handleClose, title, bodyContent, buttonArray, size, imageurl} =
+    props;
+  console.log(props);
   return (
     <>
-      <Modal isOpen={isOpen} onClose={handleClose}>
+      <Modal isOpen={isOpen} onClose={handleClose} size={size && size}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>{title}</ModalHeader>
           <ModalCloseButton />
+          {imageurl && (
+            <Image
+              my={"3rem"}
+              maxW={"100%"}
+              objectFit="cover"
+              src={imageurl}
+              alt="Chakra UI"
+              height={"20rem"}
+            />
+          )}
           <ModalBody>{bodyContent}</ModalBody>
 
           <ModalFooter>

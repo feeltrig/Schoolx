@@ -11,6 +11,7 @@ import {
 import {useRouter} from "next/router";
 
 import Sidebar from "../components/Sidebar/Sidebar";
+import {CustomStyleConstants} from "../Utils/customStyleConstants";
 
 const Layout = ({children}) => {
   const router = useRouter();
@@ -57,6 +58,12 @@ const Layout = ({children}) => {
       path: "/settings",
       subLinks: [],
     },
+    {
+      iconName: FaCog,
+      title: "Profile",
+      path: "/settings",
+      subLinks: [],
+    },
   ];
   const noSidebarUrls = ["login", "register"];
 
@@ -81,7 +88,7 @@ const Layout = ({children}) => {
     >
       {showSideBar && <Sidebar links={links} />}
       <Container
-        bgGradient="linear(to-br, gray.300, gray.400)"
+        bgGradient={`linear(to-br, ${CustomStyleConstants.globalGradient})`}
         maxW={showSideBar ? "calc(100vw - 15rem)" : "100vw"}
         m={0}
         p={"2rem"}

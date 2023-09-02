@@ -52,22 +52,14 @@ const Sidebar = (props) => {
             objectFit="cover"
           />
         </Box>
-        <Flex flexFlow={"column"} gap="1rem" my={"1rem"}>
+        <Flex flexFlow={"column"} my={"1rem"}>
           <Accordion allowToggle>
             {links.map((items, index) => {
               if (items.subLinks.length > 0) {
                 // sublinks
                 return (
-                  <AccordionItem
-                    key={index}
-                    style={{border: "none"}}
-                    _hover={{boxShadow: CustomStyleConstants["shadow-sm"]}}
-                  >
-                    <AccordionButton
-                      _hover={{
-                        bg: "white",
-                      }}
-                    >
+                  <AccordionItem key={index} style={{border: "none"}}>
+                    <AccordionButton>
                       <HStack gap={"1rem"} justify={"space-between"} w={"full"}>
                         <Link
                           href={items.path}
@@ -85,12 +77,7 @@ const Sidebar = (props) => {
                     </AccordionButton>
                     <AccordionPanel py={"1rem"}>
                       {items.subLinks.map((sublink, sublinkindex) => (
-                        <AccordionButton
-                          _hover={{
-                            boxShadow: CustomStyleConstants["shadow-sm"],
-                            bg: "white",
-                          }}
-                        >
+                        <AccordionButton>
                           <Link
                             key={sublinkindex}
                             href={sublink.path}
@@ -121,12 +108,7 @@ const Sidebar = (props) => {
                         router.pathname == items.path ? "activeLink" : ""
                       }
                     >
-                      <AccordionButton
-                        _hover={{
-                          boxShadow: CustomStyleConstants["shadow-sm"],
-                          bg: "white",
-                        }}
-                      >
+                      <AccordionButton>
                         <Flex alignItems={"center"} gap={"1rem"}>
                           <Icon color={"black"} as={items.iconName} />
                           <p>{items.title.toString()}</p>

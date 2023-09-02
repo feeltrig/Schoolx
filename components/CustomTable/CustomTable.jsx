@@ -3,6 +3,7 @@ import {
   Button,
   Checkbox,
   HStack,
+  Icon,
   Tab,
   Table,
   TableContainer,
@@ -14,6 +15,7 @@ import {
   Thead,
   Tr,
 } from "@chakra-ui/react";
+import {FaList, FaEdit} from "react-icons/fa";
 import {someArrayItemsFullfill} from "../../Funtions/dataFunctions";
 import CustomNoData from "../CustomNoData/CustomNoData";
 import CustomTableSkeleton from "./CustomTableSkeleton";
@@ -41,20 +43,18 @@ export default function CustomTable(props) {
     <>
       <Box my={"2rem"}>
         {!isLoading && (
-          <HStack justify={"space-between"}>
+          <HStack justify={"space-between"} my={"1rem"}>
             <Tabs onChange={handleTabToggle} isManual variant="unstyled">
               <TabList>
                 <Tab
                   isDisabled={(data && data.length < 1) || tabsDisableCondition}
-                  _selected={{color: "white", bg: "teal.500"}}
                 >
-                  Show All
+                  <Icon color={"black"} as={FaList} />
                 </Tab>
                 <Tab
                   isDisabled={(data && data.length < 1) || tabsDisableCondition}
-                  _selected={{color: "white", bg: "teal.500"}}
                 >
-                  Edit
+                  <Icon color={"black"} as={FaEdit} />
                 </Tab>
               </TabList>
             </Tabs>
@@ -76,12 +76,12 @@ export default function CustomTable(props) {
           </HStack>
         )}
         <TableContainer
+          shadow={"md"}
           overflowY={
             (data && data.length < 1) || isLoading ? "hidden" : "scroll"
           }
-          bg={"white"}
           maxH={data && data.length < 1 ? "max-content" : "35rem"}
-          color="gray.600"
+          // color="gray.600"
           scrollBehavior={"smooth"}
           customTableStyles={customTableStyles}
           borderRadius={"md"}
@@ -107,14 +107,15 @@ export default function CustomTable(props) {
           ) : (
             data &&
             data.length > 0 && (
-              <Table variant="simple">
+              <Table variant="unstyled" size="sm">
                 <Thead>
                   <Tr
                     style={{
-                      background: "gray.200",
+                      background: "white",
                       fontWeight: 900,
                       boxShadow: "0 0 5px 1px rgba(0,0,0,0.3)",
                       color: "black",
+                      height: "2rem",
                     }}
                   >
                     {isEditing && (
@@ -137,7 +138,7 @@ export default function CustomTable(props) {
                       <Tr
                         key={teacherIndex}
                         _hover={{
-                          background: "gray.100",
+                          background: "gray.200",
                           color: "gray.800",
                           cursor: "pointer",
                         }}

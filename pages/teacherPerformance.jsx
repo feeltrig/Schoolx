@@ -8,36 +8,16 @@ const teacherPerformance = () => {
         name: "sales",
         data: [
           {
-            x: "2019/01/01",
+            x: "2018",
             y: 400,
           },
           {
-            x: "2019/04/01",
+            x: "2019",
             y: 430,
           },
           {
-            x: "2019/07/01",
+            x: "2020",
             y: 448,
-          },
-          {
-            x: "2019/10/01",
-            y: 470,
-          },
-          {
-            x: "2020/01/01",
-            y: 540,
-          },
-          {
-            x: "2020/04/01",
-            y: 580,
-          },
-          {
-            x: "2020/07/01",
-            y: 690,
-          },
-          {
-            x: "2020/10/01",
-            y: 690,
           },
         ],
       },
@@ -53,6 +33,7 @@ const teacherPerformance = () => {
       },
       chart: {
         type: "bar",
+        parentHeightOffset: 0,
 
         background: "white",
         dropShadow: {

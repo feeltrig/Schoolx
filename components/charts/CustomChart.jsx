@@ -10,8 +10,11 @@ const CustomChart = (props) => {
     <Center
       style={{
         width: "max-content",
-        padding: "1rem",
       }}
+      p={"1rem"}
+      bg="white"
+      borderRadius={"md"}
+      shadow="md"
     >
       <Chart
         options={options.options}

@@ -42,6 +42,7 @@ export const authOptions = {
   ],
   pages: {
     signIn: "/authpages/login",
+    signOut: "/authpages/logout",
   },
 };
 

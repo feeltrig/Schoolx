@@ -44,6 +44,7 @@ const Sidebar = (props) => {
           h={"5rem"}
           my={"1rem"}
           style={{width: "100%", position: "relative"}}
+          shadow="md"
         >
           <Image
             src={profilePic}

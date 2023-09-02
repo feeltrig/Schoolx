@@ -1,8 +1,18 @@
-import {HStack, Icon} from "@chakra-ui/react";
+import {
+  HStack,
+  Icon,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  Box,
+  Center,
+} from "@chakra-ui/react";
 import React from "react";
 import {FaUserCircle} from "react-icons/fa";
 
-const Headerbar = () => {
+const Headerbar = (props) => {
+  const {menuList} = props;
   return (
     <HStack
       position={"absolute"}
@@ -13,8 +23,28 @@ const Headerbar = () => {
       p={"2rem"}
       backdropFilter="auto"
       backdropBlur="8px"
+      justify="end"
+      spacing="1rem"
     >
-      <Icon as={FaUserCircle} />
+      <Center>
+        <Icon as={FaUserCircle} />
+      </Center>
+      <Box>
+        <Menu>
+          <MenuButton variant="outline">Profile</MenuButton>
+          <MenuList>
+            {menuList &&
+              menuList.map((menuitem, menuindex) => (
+                <MenuItem
+                  key={menuindex}
+                  onClick={menuitem.onClick && menuitem.onClick}
+                >
+                  {menuitem.label}
+                </MenuItem>
+              ))}
+          </MenuList>
+        </Menu>
+      </Box>
     </HStack>
   );
 };

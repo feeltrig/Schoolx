@@ -9,6 +9,7 @@ import {
   FaChartBar,
 } from "react-icons/fa";
 import {useRouter} from "next/router";
+import {signOut, signIn} from "next-auth/react";
 
 import Sidebar from "../components/Sidebar/Sidebar";
 import {CustomStyleConstants} from "../Utils/customStyleConstants";
@@ -67,6 +68,23 @@ const Layout = ({children}) => {
     },
   ];
   const noSidebarUrls = ["login", "register"];
+  const headerMenu = [
+    {
+      label: "Login",
+      onClick: () => {
+        signIn();
+      },
+    },
+    {
+      label: "logout",
+      onClick: () => {
+        signOut();
+      },
+    },
+    {
+      label: "change password",
+    },
+  ];
 
   // check urls to show/hide sidebar
   useEffect(() => {
@@ -88,7 +106,7 @@ const Layout = ({children}) => {
       }}
     >
       {showSideBar && <Sidebar links={links} />}
-      <Headerbar />
+      {showSideBar && <Headerbar menuList={headerMenu} />}
 
       <Container
         bgGradient={`linear(to-br, ${CustomStyleConstants.globalGradient})`}

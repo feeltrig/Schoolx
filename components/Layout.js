@@ -1,4 +1,4 @@
-import {Container} from "@chakra-ui/react";
+import {Box, Container} from "@chakra-ui/react";
 import React, {useEffect, useState} from "react";
 import {
   FaChalkboardTeacher,
@@ -12,6 +12,7 @@ import {useRouter} from "next/router";
 
 import Sidebar from "../components/Sidebar/Sidebar";
 import {CustomStyleConstants} from "../Utils/customStyleConstants";
+import Headerbar from "./HeaderBar/Headerbar";
 
 const Layout = ({children}) => {
   const router = useRouter();
@@ -87,11 +88,14 @@ const Layout = ({children}) => {
       }}
     >
       {showSideBar && <Sidebar links={links} />}
+      <Headerbar />
+
       <Container
         bgGradient={`linear(to-br, ${CustomStyleConstants.globalGradient})`}
         maxW={showSideBar ? "calc(100vw - 15rem)" : "100vw"}
         m={0}
         p={"2rem"}
+        pt={"6rem"}
         minH={"100vh"}
         overflowY={"scroll"}
         sx={{

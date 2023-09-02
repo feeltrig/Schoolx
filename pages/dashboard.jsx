@@ -1,4 +1,11 @@
-import {Container, Divider, Heading, HStack, VStack} from "@chakra-ui/react";
+import {
+  Container,
+  Divider,
+  Heading,
+  HStack,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
 import React, {useMemo, useState} from "react";
 import CustomCard from "../components/CustomCard/CustomCard";
 import CustomModal from "../components/CustomModal/CustomModal";
@@ -44,7 +51,9 @@ const dashboard = () => {
         borderRadius="md"
         w={"full"}
       >
-        <Heading>Rankings</Heading>
+        <Text color="blue.800" fontSize={"2xl"}>
+          Rankings
+        </Text>
         <HStack spacing={"1rem"}>
           <CustomStats />
         </HStack>
@@ -57,7 +66,9 @@ const dashboard = () => {
         borderRadius="md"
         w={"full"}
       >
-        <Heading>Upcoming Events</Heading>
+        <Text color="blue.800" fontSize={"2xl"}>
+          Upcoming Events
+        </Text>
         <HStack spacing={"1rem"}>
           <CustomCard
             onClick={handleCardClick}

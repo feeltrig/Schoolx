@@ -3,6 +3,7 @@ import {
   Container,
   Flex,
   Heading,
+  Text,
   useToast,
   VStack,
 } from "@chakra-ui/react";
@@ -128,8 +129,11 @@ const AddTeacher = () => {
   );
 
   return (
-    <Container minW={"full"} m={0} p={0}>
-      <Heading my={"1rem"}>Add Teacher</Heading>
+    // <Container minW={"full"} m={0} p={0}>
+    <>
+      <Text fontSize={"2xl"} mb={"1rem"}>
+        Add Teacher
+      </Text>
       <Formik
         initialValues={initialValues}
         validateOnChange={true}
@@ -197,7 +201,9 @@ const AddTeacher = () => {
           </Form>
         )}
       </Formik>
-    </Container>
+    </>
+
+    // </Container>
   );
 };
 

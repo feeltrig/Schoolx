@@ -13,11 +13,11 @@ const CustomCard = (props) => {
   const {imageurl, heading, content, onClick} = props;
   return (
     <VStack
-      bg={"gray.200"}
       w={"15rem"}
       borderRadius={"md"}
       overflow={"hidden"}
-      _hover={{bg: "white", cursor: "pointer", shadow: "md"}}
+      shadow="md"
+      _hover={{bg: "white", cursor: "pointer"}}
     >
       <Image maxW={"100%"} objectFit="contain" src={imageurl} alt="Chakra UI" />
       <Stack style={{marginBlock: "1rem"}} spacing="3" px={"1rem"}>

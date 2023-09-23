@@ -28,5 +28,5 @@ const fonts = {
 export const theme = extendTheme({
   colors,
   fonts,
-  components: {Accordion: accordionTheme},
+  components: {Accordion: accordionTheme, Button: container},
 });

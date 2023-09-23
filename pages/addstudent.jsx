@@ -1,4 +1,11 @@
-import {Button, Flex, Text, useToast, VStack} from "@chakra-ui/react";
+import {
+  Button,
+  Flex,
+  Text,
+  useToast,
+  VStack,
+  Container,
+} from "@chakra-ui/react";
 import {Form, Formik} from "formik";
 import AxiosInstance from "../service/axiosInstance";
 import addTeacherSchema from "../Validations/addTeacherSchema";
@@ -10,7 +17,7 @@ import {useMemo, useState} from "react";
 import {toData64URLImage} from "../Funtions/dataFunctions";
 import CustomTextArea from "../components/CustomTextArea/CustomTextArea";
 
-const AddTeacher = () => {
+const AddStudent = () => {
   const toast = useToast();
   const [photo, setphoto] = useState(null);
 
@@ -121,79 +128,67 @@ const AddTeacher = () => {
   );
 
   return (
-    // <Container minW={"full"} m={0} p={0}>
-    <>
-      <Text fontSize={"2xl"} mb={"1rem"}>
-        Add Teacher
-      </Text>
-      <Formik
-        initialValues={initialValues}
-        validateOnChange={true}
-        validationSchema={addTeacherSchema}
-        onSubmit={async (values) => {
-          AxiosInstance.post("addTeacher", values)
-            .then((res) => {
-              toast({
-                position: "top-right",
-                title: res.data.message,
+    <Container minW={"full"} m={0} p={"2rem"} bg="white">
+      <>
+        <Text fontSize={"2xl"} mb={"1rem"}>
+          Add Student
+        </Text>
+        <Formik
+          initialValues={initialValues}
+          validateOnChange={true}
+          validationSchema={addTeacherSchema}
+          onSubmit={async (values) => {
+            AxiosInstance.post("addTeacher", values)
+              .then((res) => {
+                toast({
+                  position: "top-right",
+                  title: res.data.message,
 
-                containerStyle: {
-                  height: "100vh",
-                  padding: "2rem",
-                  margin: 0,
-                },
-              });
-            })
-            .catch((err) => console.log(err));
-        }}
-      >
-        {({errors, touched, isValid, handleChange, handleBlur, values}) => (
-          <Form>
-            <VStack align={"start"}>
-              <Flex
-                p={"2rem"}
-                flexWrap={"wrap"}
-                shadow={"md"}
-                borderRadius={"md"}
-                align="stretch"
-                gap="1rem"
-                m={0}
-              >
-                {fields.map((fieldItem, fieldItemIndex) => (
-                  <CustomInputField
-                    handleBlur={handleBlur}
-                    title={fieldItem.title}
-                    key={fieldItemIndex}
-                    name={fieldItem.name}
-                    placeholder={fieldItem.placeholder}
-                    errors={errors}
-                    touched={touched}
-                    type={fieldItem.type}
-                    customField={fieldItem.custom}
-                    customComponent={fieldItem.customComponent}
-                    customHandleChange={handleChange}
-                  />
-                ))}
-              </Flex>
-              <Button
-                _hover={{
-                  color: "gray.100",
-                  bg: "gray.900",
-                  shadow: "xl",
-                }}
-                disabled={!isValid}
-                type="submit"
-              >
-                SUBMIT
-              </Button>
-            </VStack>
-          </Form>
-        )}
-      </Formik>
-    </>
-
-    // </Container>
+                  containerStyle: {
+                    height: "100vh",
+                    padding: "2rem",
+                    margin: 0,
+                  },
+                });
+              })
+              .catch((err) => console.log(err));
+          }}
+        >
+          {({errors, touched, isValid, handleChange, handleBlur, values}) => (
+            <Form>
+              <VStack align={"start"}>
+                <Flex
+                  py={"2rem"}
+                  flexWrap={"wrap"}
+                  borderRadius={"md"}
+                  align="stretch"
+                  gap="1rem"
+                  m={0}
+                >
+                  {fields.map((fieldItem, fieldItemIndex) => (
+                    <CustomInputField
+                      handleBlur={handleBlur}
+                      title={fieldItem.title}
+                      key={fieldItemIndex}
+                      name={fieldItem.name}
+                      placeholder={fieldItem.placeholder}
+                      errors={errors}
+                      touched={touched}
+                      type={fieldItem.type}
+                      customField={fieldItem.custom}
+                      customComponent={fieldItem.customComponent}
+                      customHandleChange={handleChange}
+                    />
+                  ))}
+                </Flex>
+                <Button type="submit">SUBMIT</Button>
+              </VStack>
+            </Form>
+          )}
+        </Formik>
+      </>
+    </Container>
   );
 };
 
-export default AddTeacher;
+export default AddStudent;

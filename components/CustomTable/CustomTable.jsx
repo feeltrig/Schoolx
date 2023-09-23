@@ -84,13 +84,10 @@ export default function CustomTable(props) {
           // color="gray.600"
           scrollBehavior={"smooth"}
           customTableStyles={customTableStyles}
-          borderRadius={"md"}
-          borderTopLeftRadius={0}
           sx={{
             "&::-webkit-scrollbar": {
               width: "0px",
               height: 0,
-              borderRadius: "8px",
               backgroundColor: `rgba(0, 0, 0, 0.05)`,
             },
             "-ms-overflow-style": "none",
@@ -189,7 +186,6 @@ export default function CustomTable(props) {
             nodataMessage={"No data found"}
             textColor={"gray"}
             customNoDataStyles={{
-              borderRadius: "1rem",
               height: "20rem",
               backgroundColor: "white",
               boxShadow: "0 0 10px 1px rgba(0,0,0,0.1)",

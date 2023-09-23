@@ -5,7 +5,6 @@ const CustomTextArea = (props) => {
   const {placeholder, size, id, name, handleBlur, customHandleChange} = props;
   return (
     <Textarea
-      bgGradient="linear(to-br, white, gray.100)"
       shadow={"md"}
       borderRadius={"md"}
       placeholder={placeholder}

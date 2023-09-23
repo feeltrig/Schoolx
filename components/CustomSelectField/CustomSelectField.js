@@ -14,7 +14,6 @@ const CustomSelectField = (props) => {
   return (
     <Select
       key={key}
-      bgGradient="linear(to-br, white, gray.100)"
       shadow={"md"}
       borderRadius={"md"}
       onBlur={handleBlur}

@@ -11,7 +11,7 @@ const CustomPhotoInput = (props) => {
       {!photo && (
         <Center
           borderRadius={"2xl"}
-          shadow={"2xl"}
+          shadow={"md"}
           width={200}
           height={200}
           onClick={() => {

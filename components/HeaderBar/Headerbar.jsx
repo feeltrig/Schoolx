@@ -16,15 +16,15 @@ const Headerbar = (props) => {
   return (
     <HStack
       position={"absolute"}
-      w={"calc(100vw - 15rem)"}
+      // w={"calc(100vw - 15rem)"}
       h={"4rem"}
       right={0}
       shadow="md"
       p={"2rem"}
-      backdropFilter="auto"
-      backdropBlur="8px"
       justify="end"
+      bg={"white"}
       spacing="1rem"
+      w={"full"}
     >
       <Center>
         <Icon as={FaUserCircle} />

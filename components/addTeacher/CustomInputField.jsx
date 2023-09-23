@@ -31,7 +31,6 @@ const CustomInputField = (props) => {
           onBlur={handleBlur}
           type={type}
           placeholder={placeholder}
-          bgGradient="linear(to-br, white, gray.100)"
           shadow={"md"}
         />
       )}

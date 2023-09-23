@@ -39,12 +39,11 @@ const Sidebar = (props) => {
 
   return (
     <Show breakpoint="(min-width: 880px)">
-      <Container w={"15rem"} sx={containerStyle}>
+      <Container w={"15rem"} sx={containerStyle} shadow="md" zIndex={9}>
         <Box
           h={"5rem"}
           my={"1rem"}
           style={{width: "100%", position: "relative"}}
-          shadow="md"
         >
           <Image
             src={profilePic}

@@ -106,33 +106,39 @@ const Layout = ({children}) => {
       }}
     >
       {showSideBar && <Sidebar links={links} />}
-      {showSideBar && <Headerbar menuList={headerMenu} />}
 
-      <Container
-        bgGradient={`linear(to-br, ${CustomStyleConstants.globalGradient})`}
-        maxW={showSideBar ? "calc(100vw - 15rem)" : "100vw"}
-        m={0}
-        p={"2rem"}
-        pt={"6rem"}
-        minH={"100vh"}
-        overflowY={"scroll"}
-        sx={{
-          "&::-webkit-scrollbar": {
-            width: "0px",
-            height: 0,
-            borderRadius: "8px",
-            backgroundColor: `rgba(0, 0, 0, 0.05)`,
-          },
-          "-ms-overflow-style": "none",
-          "scrollbar-width": "none",
-
-          "&::-webkit-scrollbar:horizontal": {
-            height: "20px !important",
-          },
-        }}
+      <div
+        style={{display: "flex", flex: 1, position: "relative", width: "100vw"}}
       >
-        {children}
-      </Container>
+        {showSideBar && <Headerbar menuList={headerMenu} />}
+
+        <Container
+          // bgGradient={`linear(to-br, ${CustomStyleConstants.globalGradient})`}
+          bg={"gray.100"}
+          minW={("calc(100vw - 15rem)", "100vw")}
+          m={0}
+          p={"1rem"}
+          pt={"5rem"}
+          minH={"100vh"}
+          overflowY={"scroll"}
+          sx={{
+            "&::-webkit-scrollbar": {
+              width: "0px",
+              height: 0,
+              borderRadius: "8px",
+              backgroundColor: `rgba(0, 0, 0, 0.05)`,
+            },
+            "-ms-overflow-style": "none",
+            "scrollbar-width": "none",
+
+            "&::-webkit-scrollbar:horizontal": {
+              height: "20px !important",
+            },
+          }}
+        >
+          {children}
+        </Container>
+      </div>
     </div>
   );
 };

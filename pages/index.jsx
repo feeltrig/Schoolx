@@ -5,10 +5,11 @@ import {useEffect} from "react";
 
 export default function Items({mainState}) {
   const {status} = useSession();
+  console.log(status);
 
   useEffect(() => {
     if (status !== "authenticated") {
-      signIn();
+      // signIn();
     }
   }, []);
 

@@ -17,7 +17,7 @@ const addTeacherSchema = Yup.object().shape({
     .required("Please enter valid years of experience")
     .max(60),
   salary: Yup.number().required("Please enter annual salary").max(1000000),
-  photo: Yup.string().required("Please upload photo of teacher"),
+  // photo: Yup.string().required("Please upload photo of teacher"),
   permanentAddress: Yup.string()
     .min(2, "Too Short!")
     .max(50, "Too Long!")

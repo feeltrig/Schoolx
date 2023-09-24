@@ -1,14 +1,14 @@
 import {Button, Flex, Text, useToast, VStack} from "@chakra-ui/react";
 import {Form, Formik} from "formik";
-import AxiosInstance from "../service/axiosInstance";
-import addTeacherSchema from "../Validations/addTeacherSchema";
-import CustomInputField from "../components/addTeacher/CustomInputField";
-import CustomSelectField from "../components/CustomSelectField/CustomSelectField";
-import {genderList} from "../StaticData/Teachers/teachers";
-import CustomPhotoInput from "../components/addTeacher/CustomPhotoInput";
+import AxiosInstance from "../../service/axiosInstance";
+import addTeacherSchema from "../../Validations/addTeacherSchema";
+import CustomInputField from "../../components/addTeacher/CustomInputField";
+import CustomSelectField from "../../components/CustomSelectField/CustomSelectField";
+import {genderList} from "../../StaticData/Teachers/teachers";
+import CustomPhotoInput from "../../components/addTeacher/CustomPhotoInput";
 import {useMemo, useState} from "react";
-import {toData64URLImage} from "../Funtions/dataFunctions";
-import CustomTextArea from "../components/CustomTextArea/CustomTextArea";
+import {toData64URLImage} from "../../Funtions/dataFunctions";
+import CustomTextArea from "../../components/CustomTextArea/CustomTextArea";
 
 const AddTeacher = () => {
   const toast = useToast();

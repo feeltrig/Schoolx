@@ -1,5 +1,5 @@
 import React from "react";
-import CustomChart from "../components/charts/CustomChart";
+import CustomChart from "../../components/charts/CustomChart";
 
 const teacherPerformance = () => {
   const options = {

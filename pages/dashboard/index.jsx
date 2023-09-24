@@ -7,12 +7,15 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import React, {useMemo, useState} from "react";
-import CustomCard from "../components/CustomCard/CustomCard";
-import CustomModal from "../components/CustomModal/CustomModal";
-import CustomStats from "../components/CustomStats/CustomStats";
-import {toggleObjectState} from "../Funtions/dataFunctions";
+import CustomCard from "../../components/CustomCard/CustomCard";
+import CustomModal from "../../components/CustomModal/CustomModal";
+import CustomStats from "../../components/CustomStats/CustomStats";
+import {toggleObjectState} from "../../Funtions/dataFunctions";
+import {useSession} from "next-auth/react";
 
 const dashboard = () => {
+  const {data, status} = useSession();
+  console.log(status, data);
   const [dashboardState, setDashboardState] = useState({
     detailModalOpen: false,
     customCard: {},

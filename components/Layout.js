@@ -1,4 +1,4 @@
-import {Box, Container} from "@chakra-ui/react";
+import {Container} from "@chakra-ui/react";
 import React, {useEffect, useState} from "react";
 import {
   FaChalkboardTeacher,
@@ -12,7 +12,6 @@ import {useRouter} from "next/router";
 import {signOut, signIn} from "next-auth/react";
 
 import Sidebar from "../components/Sidebar/Sidebar";
-import {CustomStyleConstants} from "../Utils/customStyleConstants";
 import Headerbar from "./HeaderBar/Headerbar";
 
 const Layout = ({children}) => {
@@ -75,6 +74,7 @@ const Layout = ({children}) => {
         signIn();
       },
     },
+
     {
       label: "logout",
       onClick: () => {
@@ -103,6 +103,7 @@ const Layout = ({children}) => {
         flexGrow: 1,
         maxHeight: "100vh",
         backgroundColor: "white",
+        width: "100vw",
       }}
     >
       {showSideBar && <Sidebar links={links} />}
@@ -110,12 +111,10 @@ const Layout = ({children}) => {
       <div
         style={{display: "flex", flex: 1, position: "relative", width: "100vw"}}
       >
-        {showSideBar && <Headerbar menuList={headerMenu} />}
-
+        <Headerbar menuList={headerMenu} />
         <Container
-          // bgGradient={`linear(to-br, ${CustomStyleConstants.globalGradient})`}
           bg={"gray.100"}
-          minW={("calc(100vw - 15rem)", "100vw")}
+          maxW={("calc(100vw - 15rem)", "100vw")}
           m={0}
           p={"1rem"}
           pt={"5rem"}

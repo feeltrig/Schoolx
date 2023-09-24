@@ -18,6 +18,7 @@ const CustomSelectField = (props) => {
       borderRadius={"md"}
       onBlur={handleBlur}
       color={"gray.500"}
+      defaultValue="male"
       onChange={(e) => {
         onChange && onChange(e);
         customHandleChange !== undefined && customHandleChange(name)(e);

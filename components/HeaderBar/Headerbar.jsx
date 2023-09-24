@@ -15,6 +15,7 @@ const Headerbar = (props) => {
   const {menuList} = props;
   return (
     <HStack
+      className="headerbar"
       position={"absolute"}
       // w={"calc(100vw - 15rem)"}
       h={"4rem"}
@@ -24,7 +25,7 @@ const Headerbar = (props) => {
       justify="end"
       bg={"white"}
       spacing="1rem"
-      w={"full"}
+      w={"100%"}
     >
       <Center>
         <Icon as={FaUserCircle} />

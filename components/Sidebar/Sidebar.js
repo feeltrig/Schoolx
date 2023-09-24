@@ -59,7 +59,7 @@ const Sidebar = (props) => {
                 // sublinks
                 return (
                   <AccordionItem key={index} style={{border: "none"}}>
-                    <AccordionButton>
+                    <AccordionButton key={index}>
                       <HStack gap={"1rem"} justify={"space-between"} w={"full"}>
                         <Link
                           href={items.path}

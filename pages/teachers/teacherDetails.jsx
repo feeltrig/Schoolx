@@ -8,8 +8,8 @@ import {
   Text,
 } from "@chakra-ui/react";
 import {withRouter} from "next/router";
-import CustomTable from "../components/CustomTable/CustomTable";
-import {objectToArray} from "../Funtions/dataFunctions";
+import CustomTable from "../../components/CustomTable/CustomTable";
+import {objectToArray} from "../../Funtions/dataFunctions";
 
 export function TeacherDetails(props) {
   const teacherData = props.router.query;

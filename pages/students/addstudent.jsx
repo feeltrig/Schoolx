@@ -7,15 +7,15 @@ import {
   Container,
 } from "@chakra-ui/react";
 import {Form, Formik} from "formik";
-import AxiosInstance from "../service/axiosInstance";
-import addTeacherSchema from "../Validations/addTeacherSchema";
-import CustomInputField from "../components/addTeacher/CustomInputField";
-import CustomSelectField from "../components/CustomSelectField/CustomSelectField";
-import {genderList} from "../StaticData/Teachers/teachers";
-import CustomPhotoInput from "../components/addTeacher/CustomPhotoInput";
+import AxiosInstance from "../../service/axiosInstance";
+import addTeacherSchema from "../../Validations/addTeacherSchema";
+import CustomInputField from "../../components/addTeacher/CustomInputField";
+import CustomSelectField from "../../components/CustomSelectField/CustomSelectField";
+import {genderList} from "../../StaticData/Teachers/teachers";
+import CustomPhotoInput from "../../components/addTeacher/CustomPhotoInput";
 import {useMemo, useState} from "react";
-import {toData64URLImage} from "../Funtions/dataFunctions";
-import CustomTextArea from "../components/CustomTextArea/CustomTextArea";
+import {toData64URLImage} from "../../Funtions/dataFunctions";
+import CustomTextArea from "../../components/CustomTextArea/CustomTextArea";
 
 const AddStudent = () => {
   const toast = useToast();
@@ -105,24 +105,24 @@ const AddStudent = () => {
           <CustomTextArea placeholder="Enter temporary address" size="sm" />
         ),
       },
-      {
-        title: "Photo",
-        name: "photo",
-        type: "number",
-        placeholder: "Enter your experience as a teacher",
-        custom: true,
-        customComponent: (
-          <CustomPhotoInput
-            photo={photo}
-            removePhoto={() => {
-              setphoto(null);
-            }}
-            handleChange={(e) => {
-              toData64URLImage(e.target.files[0], setphoto);
-            }}
-          />
-        ),
-      },
+      // {
+      //   title: "Photo",
+      //   name: "photo",
+      //   type: "number",
+      //   placeholder: "Enter your experience as a teacher",
+      //   custom: true,
+      //   customComponent: (
+      //     <CustomPhotoInput
+      //       photo={photo}
+      //       removePhoto={() => {
+      //         setphoto(null);
+      //       }}
+      //       handleChange={(e) => {
+      //         toData64URLImage(e.target.files[0], setphoto);
+      //       }}
+      //     />
+      //   ),
+      // },
     ],
     [photo, genderList]
   );
@@ -137,7 +137,8 @@ const AddStudent = () => {
           initialValues={initialValues}
           validateOnChange={true}
           validationSchema={addTeacherSchema}
-          onSubmit={async (values) => {
+          onSubmit={(values) => {
+            console.log(values);
             AxiosInstance.post("addTeacher", values)
               .then((res) => {
                 toast({
@@ -156,6 +157,7 @@ const AddStudent = () => {
         >
           {({errors, touched, isValid, handleChange, handleBlur, values}) => (
             <Form>
+              {console.log(errors, isValid, values)}
               <VStack align={"start"}>
                 <Flex
                   py={"2rem"}

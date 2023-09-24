@@ -1,8 +1,8 @@
 import {Container} from "@chakra-ui/react";
-import CustomTable from "../components/CustomTable/CustomTable";
-import SearchBar from "../components/parents/SearchBar";
+import CustomTable from "../../components/CustomTable/CustomTable";
+import SearchBar from "../../components/parents/SearchBar";
 import Router from "next/router";
-import fakeDb from "../fakeDb/students.json";
+import fakeDb from "../../fakeDb/students.json";
 import {useEffect, useState} from "react";
 import {
   initializeState,
@@ -13,10 +13,10 @@ import {
   setSingleItemInArrayByField,
   addIsCheckedFieldArray,
   getAllItemsWithConditionArray,
-} from "../Funtions/dataFunctions";
-import {gotoPageWithData} from "../Funtions/routingFunctions";
-import CustomModal from "../components/CustomModal/CustomModal";
-import {stringsConstants} from "../Utils/stringsConstants";
+} from "../../Funtions/dataFunctions";
+import {gotoPageWithData} from "../../Funtions/routingFunctions";
+import CustomModal from "../../components/CustomModal/CustomModal";
+import {stringsConstants} from "../../Utils/stringsConstants";
 
 export default function Teachers() {
   // table headers

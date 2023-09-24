@@ -4,18 +4,18 @@ import CredentialsProvider from "next-auth/providers/credentials";
 
 const callbacks = {
   jwt: async ({token, user}) => {
-    if (user) {
-      token.accessToken = user.data.accessToken;
-      token.refreshToken = user.data.refreshToken;
+    console.log("token", token, user);
+    // if (user) {
+    //   token.accessToken = user.data.accessToken;
+    //   token.refreshToken = user.data.refreshToken;
 
-      return Promise.resolve(token);
-    }
+    //   return Promise.resolve(token);
+    // }
   },
   session: async ({session, token}) => {
-    session.accessToken = token.accessToken;
-    session.refreshToken = token.refreshToken;
-
-    return Promise.resolve(session);
+    // session.accessToken = token.accessToken;
+    // session.refreshToken = token.refreshToken;
+    // return Promise.resolve(session);
   },
 };
 
@@ -29,7 +29,7 @@ export const authOptions = {
         password: {label: "Password", type: "password"},
       },
       async authorize(credentials, req) {
-        console.log(credentials, req);
+        console.log("authorize", credentials.username);
         return JSON.stringify(credentials);
       },
     }),

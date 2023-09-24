@@ -9,10 +9,12 @@ import {
   FaChartBar,
 } from "react-icons/fa";
 import {useRouter} from "next/router";
+import Router from "next/router";
 import {signOut, signIn} from "next-auth/react";
 
 import Sidebar from "../components/Sidebar/Sidebar";
 import Headerbar from "./HeaderBar/Headerbar";
+import {gotoPage} from "../Funtions/routingFunctions";
 
 const Layout = ({children}) => {
   const router = useRouter();
@@ -66,8 +68,14 @@ const Layout = ({children}) => {
       subLinks: [],
     },
   ];
-  const noSidebarUrls = ["login", "register"];
+  const noSidebarUrls = ["login", "register", "signin"];
   const headerMenu = [
+    {
+      label: "Sign In",
+      onClick: () => {
+        gotoPage(Router, "/authpages/signin");
+      },
+    },
     {
       label: "Login",
       onClick: () => {
@@ -111,7 +119,7 @@ const Layout = ({children}) => {
       <div
         style={{display: "flex", flex: 1, position: "relative", width: "100vw"}}
       >
-        <Headerbar menuList={headerMenu} />
+        {showSideBar && <Headerbar menuList={headerMenu} />}
         <Container
           bg={"gray.100"}
           maxW={("calc(100vw - 15rem)", "100vw")}

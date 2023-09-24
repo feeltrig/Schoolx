@@ -5,3 +5,9 @@ export const gotoPageWithData = (router, pathname, data) => {
     query: data,
   });
 };
+
+export const gotoPage = (router, pathname) => {
+  router.push({
+    pathname: pathname,
+  });
+};

@@ -1,6 +1,6 @@
-import fakeDb from "../../../fakeDb/parents.json";
+// import fakeDb from "../../../fakeDb/parents.json";
 import connectMongo from "../../../services/connectMongo";
-import Test from "../../../models/testmodel";
+import Parent from "../../../models/parents/parentmodel";
 
 export default async function handler(req, res) {
   try {
@@ -9,7 +9,7 @@ export default async function handler(req, res) {
     console.log("CONNECTED TO MONGO");
 
     console.log("CREATING DOCUMENT");
-    const test = await Test.create(req.body);
+    const test = await Parent.create(req.body);
     console.log("CREATED DOCUMENT");
 
     res.json({test});
